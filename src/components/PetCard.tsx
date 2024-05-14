@@ -12,7 +12,11 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 
-export const PetCard = ({ name, dateOfBirth }) => {
+interface PetCardProps {
+  name: string;
+  dateOfBirth: string;
+}
+export const PetCard = ({ name, dateOfBirth }: PetCardProps) => {
   return (
     <Card className="w-[350px]">
       <CardHeader>
