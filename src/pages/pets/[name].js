@@ -1,4 +1,4 @@
-import { mockPets } from "@/data/data";rm 
+import { mockPets } from "@/data/data";
 
 export async function getStaticPaths() {
   const paths = mockPets.map((pet) => ({
