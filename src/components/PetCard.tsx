@@ -19,10 +19,10 @@ interface PetCardProps {
 }
 export const PetCard = ({ name, dateOfBirth, species }: PetCardProps) => {
   return (
-    <Card className='w-[350px]'>
+    <Card className="w-[350px]">
       <CardHeader>
         <Avatar>
-          <AvatarImage src='https://github.com/shadcn.png' alt='@shadcn' />
+          <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <CardTitle>{name}</CardTitle>

@@ -1,4 +1,4 @@
-import { PetGrid } from "@/components/PetGrid";
+import { PetGrid } from '@/components/PetGrid';
 
 export default function Home() {
   return (
