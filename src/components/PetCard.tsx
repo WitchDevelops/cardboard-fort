@@ -15,8 +15,9 @@ import Link from 'next/link';
 interface PetCardProps {
   name: string;
   dateOfBirth: string;
+  species: string;
 }
-export const PetCard = ({ name, dateOfBirth }: PetCardProps) => {
+export const PetCard = ({ name, dateOfBirth, species }: PetCardProps) => {
   return (
     <Card className='w-[350px]'>
       <CardHeader>
@@ -25,6 +26,7 @@ export const PetCard = ({ name, dateOfBirth }: PetCardProps) => {
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <CardTitle>{name}</CardTitle>
+        <p>{species}</p>
         <CardDescription>Born on {dateOfBirth}</CardDescription>
       </CardHeader>
       <CardContent>
