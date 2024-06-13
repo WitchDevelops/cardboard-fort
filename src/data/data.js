@@ -2,6 +2,7 @@ export const mockPets = [
   {
     name: 'Max',
     dateOfBirth: '2018-01-01',
+    breed: 'bulldog',
     vaccinations: [
       { name: 'Rabies', date: '2019-01-01', expiryDate: '2022-01-01' },
       { name: 'Distemper', date: '2019-02-01', expiryDate: '2022-02-01' },
@@ -22,6 +23,7 @@ export const mockPets = [
   },
   {
     name: 'Bella',
+    breed: 'Norwegian forest cat',
     dateOfBirth: '2019-05-01',
     vaccinations: [
       { name: 'Rabies', date: '2020-05-01', expiryDate: '2023-05-01' },
@@ -35,6 +37,7 @@ export const mockPets = [
   },
   {
     name: 'Charlie',
+    breed: 'labrador',
     dateOfBirth: '2017-09-01',
     vaccinations: [
       { name: 'Rabies', date: '2018-09-01', expiryDate: '2021-09-01' },
@@ -56,6 +59,7 @@ export const mockPets = [
   },
   {
     name: 'Lucy',
+    breed: 'european',
     dateOfBirth: '2016-12-01',
     vaccinations: [
       { name: 'Rabies', date: '2017-12-01', expiryDate: '2020-12-01' },

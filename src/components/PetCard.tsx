@@ -12,9 +12,11 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Link from 'next/link';
 import { TbGenderMale, TbGenderFemale } from 'react-icons/tb';
+import { font_accent } from '@/components/ui/fonts';
 
 interface PetCardProps {
   name: string;
+  breed?: string;
   dateOfBirth: string;
   species: string;
   gender?: string;
@@ -22,7 +24,7 @@ interface PetCardProps {
 export const PetCard = ({
   name,
   dateOfBirth,
-  species,
+  breed,
   gender,
 }: PetCardProps) => {
   const genderDescription =
@@ -45,8 +47,8 @@ export const PetCard = ({
           <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
-        <CardTitle>{name}</CardTitle>
-        <p>{species}</p>
+        <CardTitle className={`${font_accent.className} font-semibold text-3xl`}>{name}</CardTitle>
+        <p>{breed}</p>
         <CardDescription>Born on {dateOfBirth}</CardDescription>
         {genderDescription && (
           <CardDescription className="flex items-center gap-1">{genderDescription}</CardDescription>
