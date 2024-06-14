@@ -1,5 +1,5 @@
-import { mockPets } from "@/data/data";
-import { PetCard } from "@/components/PetCard";
+import { mockPets } from '@/data/data';
+import { PetCard } from '@/components/PetCard';
 
 export const PetGrid = () => {
   return (

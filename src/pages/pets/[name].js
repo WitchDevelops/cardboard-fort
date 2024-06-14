@@ -1,4 +1,4 @@
-import { mockPets } from "@/data/data";
+import { mockPets } from '@/data/data';
 
 export async function getStaticPaths() {
   const paths = mockPets.map((pet) => ({
@@ -16,8 +16,8 @@ export async function getStaticProps({ params }) {
   };
 }
 
-import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function PetPage({ pet }) {
   return (
@@ -28,7 +28,7 @@ export default function PetPage({ pet }) {
       <CardContent>
         <p>Born on: {pet.dateOfBirth}</p>
         <p>Species: {pet.species}</p>
-        <p>Neutered: {pet.neutered ? "Yes" : "No"}</p>
+        <p>Neutered: {pet.neutered ? 'Yes' : 'No'}</p>
         <p>Bio: {pet.bio}</p>
         {/* Add more pet data here */}
       </CardContent>
