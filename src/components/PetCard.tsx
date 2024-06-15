@@ -13,6 +13,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Link from 'next/link';
 import { TbGenderMale, TbGenderFemale } from 'react-icons/tb';
 import { font_accent } from '@/components/ui/fonts';
+import {styles} from '@/styles'
 
 interface PetCardProps {
   name: string;
