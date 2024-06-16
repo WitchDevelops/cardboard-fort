@@ -21,11 +21,12 @@ const config = {
       colors: {
         primary: '#A47786',
         secondary: '#9DB6CC',
+        danger: '#E52B50',
         'primary-100': '#E4D4C8',
         'primary-500': '#533440',
         'white-100': '#f8f9fd',
-        'white-400':'#d8d8d8',
-        'black':'#0f0f0f',
+        'white-400': '#d8d8d8',
+        black: '#0f0f0f',
       },
       borderRadius: {
         lg: '1rem',
