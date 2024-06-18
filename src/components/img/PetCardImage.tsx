@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { UnavailableImg } from './UnavailableImg';
+import { UnavailableImage } from './UnavailableImage';
 
 interface PetCardImageProps {
   img?: string;
@@ -9,7 +9,7 @@ interface PetCardImageProps {
 export const PetCardImage: React.FC<PetCardImageProps> = ({ img, alt }) => {
   return (
     <div className="absolute top-0 left-0 rounded-xl w-full h-full shrink-0 overflow-hidden z-0">
-      <Suspense fallback={<UnavailableImg />}>
+      <Suspense fallback={<UnavailableImage />}>
         {img ? (
           <img
             className="aspect-square h-full w-full object-cover"
@@ -17,7 +17,7 @@ export const PetCardImage: React.FC<PetCardImageProps> = ({ img, alt }) => {
             alt={alt}
           />
         ) : (
-          <UnavailableImg />
+          <UnavailableImage />
         )}
       </Suspense>
     </div>
