@@ -1,19 +1,19 @@
 import React from 'react';
-import { mockPets } from '@/data/data';
-import { Button } from '@/components/ui/button';
 import {
   Card,
-  CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Link from 'next/link';
-import { TbGenderMale, TbGenderFemale } from 'react-icons/tb';
+import {
+  TbGenderMale,
+  TbGenderFemale,
+  TbClockHour3,
+  TbAlertCircle,
+} from 'react-icons/tb';
 import { font_accent } from '@/components/ui/fonts';
-import {styles} from '@/styles'
+import { PetCardImage } from './img/PetCardImage';
 
 interface PetCardProps {
   name: string;
@@ -21,12 +21,14 @@ interface PetCardProps {
   dateOfBirth: string;
   species: string;
   gender?: string;
+  img?: string;
 }
 export const PetCard = ({
   name,
   dateOfBirth,
   breed,
   gender,
+  img,
 }: PetCardProps) => {
   const genderDescription =
     gender === 'male' ? (
@@ -42,24 +44,33 @@ export const PetCard = ({
     ) : null;
 
   return (
-    <Card className="w-[350px]">
-      <CardHeader>
-        <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-        <CardTitle className={`${font_accent.className} font-semibold text-3xl`}>{name}</CardTitle>
-        <p>{breed}</p>
-        <CardDescription>Born on {dateOfBirth}</CardDescription>
-        {genderDescription && (
-          <CardDescription className="flex items-center gap-1">{genderDescription}</CardDescription>
-        )}
-      </CardHeader>
-      <CardContent>
-        <Link href={`/pets/${name}`}>
-          <Button>See more</Button>
-        </Link>
-      </CardContent>
-    </Card>
+    <Link href={`/pets/${name}`}>
+      <Card className="w-[300px] h-[350px] relative">
+        <CardHeader>
+          <PetCardImage img={img} alt={name} />
+          <div className="relative z-1 p-4 min-h-[33%] bg-black backdrop-blur-sm bg-opacity-60 rounded-b-xl flex flex-col justify-between">
+            <CardTitle
+              className={`${font_accent.className} font-semibold text-3xl flex justify-between items-center`}
+            >
+              {name}
+
+              <TbAlertCircle className="text-danger" />
+            </CardTitle>
+            <p>{breed}</p>
+            <div className="flex justify-between items-center ">
+              {genderDescription && (
+                <CardDescription className="flex items-center gap-1">
+                  {genderDescription}
+                </CardDescription>
+              )}
+              <CardDescription className="flex items-center gap-1">
+                <TbClockHour3 />
+                {dateOfBirth}
+              </CardDescription>
+            </div>
+          </div>
+        </CardHeader>
+      </Card>
+    </Link>
   );
 };

@@ -3,6 +3,7 @@ export const mockPets = [
     name: 'Max',
     dateOfBirth: '2018-01-01',
     breed: 'bulldog',
+    img: 'https://images.pexels.com/photos/11383098/pexels-photo-11383098.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     vaccinations: [
       { name: 'Rabies', date: '2019-01-01', expiryDate: '2022-01-01' },
       { name: 'Distemper', date: '2019-02-01', expiryDate: '2022-02-01' },
@@ -24,6 +25,7 @@ export const mockPets = [
   {
     name: 'Bella',
     breed: 'Norwegian forest cat',
+    img: 'https://images.pexels.com/photos/16237355/pexels-photo-16237355/free-photo-of-close-up-of-a-norwegian-forest-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     dateOfBirth: '2019-05-01',
     vaccinations: [
       { name: 'Rabies', date: '2020-05-01', expiryDate: '2023-05-01' },
@@ -38,6 +40,7 @@ export const mockPets = [
   {
     name: 'Charlie',
     breed: 'labrador',
+    img: 'https://images.pexels.com/photos/1696589/pexels-photo-1696589.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     dateOfBirth: '2017-09-01',
     vaccinations: [
       { name: 'Rabies', date: '2018-09-01', expiryDate: '2021-09-01' },
@@ -61,6 +64,7 @@ export const mockPets = [
     name: 'Lucy',
     breed: 'european',
     dateOfBirth: '2016-12-01',
+    img: 'https://images.pexels.com/photos/208984/pexels-photo-208984.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     vaccinations: [
       { name: 'Rabies', date: '2017-12-01', expiryDate: '2020-12-01' },
       { name: 'Feline Leukemia', date: '2018-12-01', expiryDate: '2021-12-01' },
@@ -73,6 +77,7 @@ export const mockPets = [
   },
   {
     name: 'Rocky',
+    breed: 'european',
     dateOfBirth: '2015-03-01',
     vaccinations: [
       { name: 'Rabies', date: '2016-03-01', expiryDate: '2019-03-01' },
@@ -91,6 +96,7 @@ export const mockPets = [
         endDate: '2021-12-31',
       },
     ],
+    gender: 'female',
     neutered: true,
     species: 'Dog',
     bio: 'Rocky is an active and playful dog who loves to run and play fetch.',
@@ -148,7 +154,8 @@ export const mockPets = [
     ],
     medicines: [],
     neutered: true,
-    species: 'Dog',
+    species: 'Other',
+    img: 'https://images.pexels.com/photos/208799/pexels-photo-208799.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     bio: 'Molly is a sweet and gentle dog who loves to be around people and other animals.',
   },
   {
