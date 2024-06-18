@@ -1,7 +1,18 @@
-import { mockPets } from '@/data/data';
+//generates url slugs based on the data in the database,
+//so that each pet has their own page with url: '/pets/[name]'
+//code thanks to Le Chat, I don't understand what's going on here
+
+import { supabase } from '@/lib/supabase';
 
 export async function getStaticPaths() {
-  const paths = mockPets.map((pet) => ({
+  const { data: pets, error } = await supabase.from('pets_data').select('name');
+
+  if (error) {
+    console.error(error);
+    return { paths: [], fallback: false };
+  }
+
+  const paths = pets.map((pet) => ({
     params: { name: pet.name },
   }));
 
@@ -9,7 +20,16 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const pet = mockPets.find((pet) => pet.name === params.name);
+  const { data: pet, error } = await supabase
+    .from('pets_data')
+    .select('*')
+    .eq('name', params.name)
+    .single();
+
+  if (error) {
+    console.error(error);
+    return { notFound: true };
+  }
 
   return {
     props: { pet },
@@ -21,6 +41,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function PetPage({ pet }) {
   return (
+    // TODO: refactor this into a separate component
     <Card>
       <CardHeader>
         <CardTitle>{pet.name}</CardTitle>
