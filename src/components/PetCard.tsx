@@ -1,25 +1,19 @@
-import React, { useState } from 'react';
-import { mockPets } from '@/data/data';
-import { Button } from '@/components/ui/button';
+import React from 'react';
 import {
   Card,
-  CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Link from 'next/link';
 import {
   TbGenderMale,
   TbGenderFemale,
   TbClockHour3,
-  TbPaw,
   TbAlertCircle,
 } from 'react-icons/tb';
 import { font_accent } from '@/components/ui/fonts';
-import { styles } from '@/styles';
+import { PetCardImage } from './img/PetCardImage';
 
 interface PetCardProps {
   name: string;
@@ -27,8 +21,15 @@ interface PetCardProps {
   dateOfBirth: string;
   species: string;
   gender?: string;
+  img?: string;
 }
-export const PetCard = ({ name, dateOfBirth, breed, gender }: PetCardProps) => {
+export const PetCard = ({
+  name,
+  dateOfBirth,
+  breed,
+  gender,
+  img,
+}: PetCardProps) => {
   const genderDescription =
     gender === 'male' ? (
       <>
@@ -46,17 +47,8 @@ export const PetCard = ({ name, dateOfBirth, breed, gender }: PetCardProps) => {
     <Link href={`/pets/${name}`}>
       <Card className="w-[300px] h-[350px] relative">
         <CardHeader>
-          <Avatar className="absolute top-0 left-0 z-0">
-            <AvatarImage
-              src="https://images.pexels.com/photos/3777622/pexels-photo-3777622.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              // src="https://images.pexels.com/photos/159492/wildlife-photography-pet-photography-dog-dog-runs-159492.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt="@shadcn"
-            />
-            <AvatarFallback>
-              <TbPaw className="w-full h-full" />
-            </AvatarFallback>
-          </Avatar>
-          <div className="relative z-1 p-4 bg-black backdrop-blur-sm bg-opacity-60 rounded-b-xl">
+          <PetCardImage img={img} alt={name} />
+          <div className="relative z-1 p-4 min-h-[33%] bg-black backdrop-blur-sm bg-opacity-60 rounded-b-xl flex flex-col justify-between">
             <CardTitle
               className={`${font_accent.className} font-semibold text-3xl flex justify-between items-center`}
             >
