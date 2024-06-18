@@ -13,14 +13,14 @@ import {
   TbAlertCircle,
 } from 'react-icons/tb';
 import { font_accent } from '@/components/ui/fonts';
-import { PetCardImage } from './img/PetCardImage';
+import { PetCardImage } from '@/components/img/PetCardImage';
 
 interface PetCardProps {
   name: string;
   breed?: string;
   dateOfBirth: string;
   species: string;
-  gender?: string;
+  gender?: 'female' | 'male';
   img?: string;
 }
 export const PetCard = ({
