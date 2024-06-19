@@ -3,6 +3,7 @@
 //code thanks to Le Chat, I don't understand what's going on here
 
 import { supabase } from '@/lib/supabase';
+import { DateOfBirth } from '@/components/DateOfBirth';
 
 export async function getStaticPaths() {
   const { data: pets, error } = await supabase.from('pets_data').select('name');
@@ -47,7 +48,7 @@ export default function PetPage({ pet }) {
         <CardTitle>{pet.name}</CardTitle>
       </CardHeader>
       <CardContent>
-        <p>Born on: {pet.dateOfBirth}</p>
+        <p>Born on: <DateOfBirth dateOfBirth={pet.date_of_birth} /></p>
         <p>Species: {pet.species}</p>
         <p>Neutered: {pet.neutered ? 'Yes' : 'No'}</p>
         <p>Bio: {pet.bio}</p>
