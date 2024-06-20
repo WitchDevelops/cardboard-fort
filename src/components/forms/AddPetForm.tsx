@@ -3,6 +3,7 @@
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { addPet } from '@/data/pets/addPet';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -25,6 +26,10 @@ import {
 
 import { toast } from '@/components/ui/use-toast';
 
+//date has to be in the YYYY-MM-DD format so that it's compatible with the format in the database
+const dateRegex =
+  /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/;
+
 const FormSchema = z.object({
   name: z
     .string()
@@ -35,6 +40,13 @@ const FormSchema = z.object({
       message: 'Pet name cannot be longer than 50 characters.',
     }),
   species: z.string(),
+  dateOfBirth: z.string().regex(dateRegex, {
+    message: 'Please use the format YYYY-MM-DD.',
+  }),
+  breed: z.string(),
+  picture: z.string(),
+  sex: z.enum(['male', 'female']),
+  neutered: z.enum(['yes', 'no']),
 });
 
 export const AddPetForm = () => {
@@ -43,18 +55,31 @@ export const AddPetForm = () => {
     defaultValues: {
       name: 'Kitty',
       species: 'Cat',
+      dateOfBirth: '2020-12-12',
+      sex: 'female',
+      neutered: 'yes',
+      breed: 'European',
+      picture:
+        'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F20787%2Fpexels-photo.jpg%3Fcs%3Dsrgb%26dl%3Danimal-cat-adorable-20787.jpg%26fm%3Djpg&f=1&nofb=1&ipt=4d8a50d5b1dba3e542085b753af676db95035adc6fc94508a7d81bbd730bd989&ipo=images',
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: 'You submitted the following values:',
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    const success = await addPet(data);
+
+    if (success) {
+      console.log('Pet added! No do a hard reload to see it');
+      //TODO: figure out why the toasts not appear
+      toast({
+        title: 'Pet added successfully!',
+      });
+    } else {
+      console.log('not added, some error');
+      toast({
+        title: 'Error adding pet.',
+        description: 'Please try again later.',
+      });
+    }
   }
 
   return (
@@ -92,6 +117,88 @@ export const AddPetForm = () => {
             </FormItem>
           )}
         />
+        <FormField
+          control={form.control}
+          name="sex"
+          render={() => (
+            <FormItem>
+              <FormLabel>Sex</FormLabel>
+              <FormControl>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white">
+                    <SelectItem value="male">Male</SelectItem>
+                    <SelectItem value="female">Female</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="neutered"
+          render={() => (
+            <FormItem>
+              <FormLabel>Neutered</FormLabel>
+              <FormControl>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white">
+                    <SelectItem value="yes">Yes</SelectItem>
+                    <SelectItem value="no">No</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="dateOfBirth"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Date of Birth</FormLabel>
+              <FormControl>
+                <Input type="text" placeholder="YYYY-MM-DD" {...field} />
+              </FormControl>
+              <FormMessage className="text-danger" />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="breed"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Breed</FormLabel>
+              <FormControl>
+                <Input placeholder="European" {...field} />
+              </FormControl>
+              <FormMessage className="text-danger" />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="picture"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Picture</FormLabel>
+              <FormControl>
+                <Input placeholder="" {...field} />
+              </FormControl>
+              <FormMessage className="text-danger" />
+            </FormItem>
+          )}
+        />
+
         <Button type="submit">Submit</Button>
       </form>
     </Form>

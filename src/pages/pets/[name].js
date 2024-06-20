@@ -2,7 +2,7 @@
 //so that each pet has their own page with url: '/pets/[name]'
 //code thanks to Le Chat, I don't understand what's going on here
 
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/services/supabase';
 
 export async function getStaticPaths() {
   const { data: pets, error } = await supabase.from('pets_data').select('name');
