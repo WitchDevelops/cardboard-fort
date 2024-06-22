@@ -14,6 +14,7 @@ import {
 } from 'react-icons/tb';
 import { font_accent } from '@/components/ui/fonts';
 import { PetCardImage } from '@/components/img/PetCardImage';
+import { formatDate } from '@/utils/date/formatDate';
 
 interface PetCardProps {
   name: string;
@@ -44,11 +45,7 @@ export const PetCard = ({
       </>
     ) : null;
 
-  const formattedDateOfBirth = new Date(date_of_birth).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+  const formattedDateOfBirth = formatDate(date_of_birth);
 
   return (
     <Link href={`/pets/${name}`}>
