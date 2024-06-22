@@ -24,6 +24,7 @@ import {
 } from '@/components/ui/select';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useToast } from '@/components/ui/use-toast';
+import { TextInput } from '@/components/forms/TextInput';
 
 //date has to be in the YYYY-MM-DD format so that it's compatible with the format in the database
 const dateRegex =
@@ -51,16 +52,6 @@ const FormSchema = z.object({
 export const AddPetForm = () => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-    defaultValues: {
-      name: 'Kitty',
-      species: 'Cat',
-      dateOfBirth: '2020-12-12',
-      sex: 'female',
-      neutered: 'yes',
-      breed: 'European',
-      picture:
-        'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F20787%2Fpexels-photo.jpg%3Fcs%3Dsrgb%26dl%3Danimal-cat-adorable-20787.jpg%26fm%3Djpg&f=1&nofb=1&ipt=4d8a50d5b1dba3e542085b753af676db95035adc6fc94508a7d81bbd730bd989&ipo=images',
-    },
   });
   const { toast } = useToast();
   async function onSubmit(data: z.infer<typeof FormSchema>) {
@@ -72,6 +63,7 @@ export const AddPetForm = () => {
         );
         toast({
           title: 'Pet added successfully!',
+          className: 'bg-white',
         });
 
         //TODO: figure out how to update the list of pets
@@ -81,6 +73,7 @@ export const AddPetForm = () => {
       console.error('An error occurred while adding the pet:', error);
       toast({
         title: 'Error adding pet.',
+        className: 'bg-danger',
       });
     }
   }
@@ -92,19 +85,14 @@ export const AddPetForm = () => {
           onSubmit={form.handleSubmit(onSubmit)}
           className="w-full space-y-6"
         >
-          <FormField
-            control={form.control}
+          <TextInput
+            label="Pet Name*"
             name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Pet Name*</FormLabel>
-                <FormControl>
-                  <Input placeholder="Kitty" {...field} />
-                </FormControl>
-                <FormMessage className="text-danger" />
-              </FormItem>
-            )}
+            placeholder="Kitty Cat"
+            register={form.register}
+            error={form.formState.errors.name?.message}
           />
+          {/* TODO: select fields are not being registered, despite having input selected they do not register (error pops up) */}
           <FormField
             control={form.control}
             name="species"
@@ -121,6 +109,7 @@ export const AddPetForm = () => {
                     <SelectItem value="Other">Other...</SelectItem>
                   </SelectContent>
                 </Select>
+                <FormMessage className="text-danger" />
               </FormItem>
             )}
           />
@@ -141,7 +130,7 @@ export const AddPetForm = () => {
                     </SelectContent>
                   </Select>
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-danger" />
               </FormItem>
             )}
           />
@@ -162,10 +151,11 @@ export const AddPetForm = () => {
                     </SelectContent>
                   </Select>
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-danger" />
               </FormItem>
             )}
           />
+          {/* TODO: refactor to use a date picker */}
           <FormField
             control={form.control}
             name="dateOfBirth"
@@ -179,31 +169,21 @@ export const AddPetForm = () => {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
+
+          <TextInput
+            label="Breed"
             name="breed"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Breed</FormLabel>
-                <FormControl>
-                  <Input placeholder="European" {...field} />
-                </FormControl>
-                <FormMessage className="text-danger" />
-              </FormItem>
-            )}
+            placeholder="European"
+            register={form.register}
+            error={form.formState.errors.name?.message}
           />
-          <FormField
-            control={form.control}
+
+          <TextInput
+            label="Picture"
             name="picture"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Picture</FormLabel>
-                <FormControl>
-                  <Input placeholder="" {...field} />
-                </FormControl>
-                <FormMessage className="text-danger" />
-              </FormItem>
-            )}
+            placeholder="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F20787%2Fpexels-photo.jpg%3Fcs%3Dsrgb%26dl%3Danimal-cat-adorable-20787.jpg%26fm%3Djpg&f=1&nofb=1&ipt=4d8a50d5b1dba3e542085b753af676db95035adc6fc94508a7d81bbd730bd989&ipo=images"
+            register={form.register}
+            error={form.formState.errors.name?.message}
           />
 
           <Button type="submit">Submit</Button>
