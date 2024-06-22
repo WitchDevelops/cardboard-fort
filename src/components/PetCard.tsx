@@ -14,7 +14,6 @@ import {
 } from 'react-icons/tb';
 import { font_accent } from '@/components/ui/fonts';
 import { PetCardImage } from '@/components/img/PetCardImage';
-import { formatDate } from '@/utils/date/formatDate';
 import { calculateAge } from '@/utils/date/calculateAge';
 
 interface PetCardProps {
@@ -46,10 +45,8 @@ export const PetCard = ({
       </>
     ) : null;
 
-  const formattedDateOfBirth = formatDate(date_of_birth);
   const currentDate = new Date();
-const age = calculateAge(date_of_birth, currentDate);
-
+  const age = calculateAge(date_of_birth, currentDate);
 
   return (
     <Link href={`/pets/${name}`}>
@@ -73,7 +70,6 @@ const age = calculateAge(date_of_birth, currentDate);
               )}
               <CardDescription className="flex items-center gap-1">
                 <TbClockHour3 />
-                {/* {formattedDateOfBirth} */}
                 {age}
               </CardDescription>
             </div>
