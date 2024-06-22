@@ -14,7 +14,6 @@ import {
 } from 'react-icons/tb';
 import { font_accent } from '@/components/ui/fonts';
 import { PetCardImage } from '@/components/img/PetCardImage';
-import { DateOfBirth } from '@/components/DateOfBirth';
 
 interface PetCardProps {
   name: string;
@@ -45,6 +44,12 @@ export const PetCard = ({
       </>
     ) : null;
 
+  const date = new Date(date_of_birth).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
   return (
     <Link href={`/pets/${name}`}>
       <Card className="w-[300px] h-[350px] relative">
@@ -67,7 +72,7 @@ export const PetCard = ({
               )}
               <CardDescription className="flex items-center gap-1">
                 <TbClockHour3 />
-                <DateOfBirth dateOfBirth={date_of_birth} />
+                {date}
               </CardDescription>
             </div>
           </div>
