@@ -2,12 +2,15 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { TbCirclePlus } from 'react-icons/tb';
 
-export const AddPetBtn = () => {
+interface LaunchModalBtnProps {
+  title: string,
+}
+export const LaunchModalBtn = ({title}: LaunchModalBtnProps) => {
   return (
     <Button className="gap-2">
-      <TbCirclePlus /> Add a new pet
+      <TbCirclePlus /> {title}
     </Button>
   );
 };
 
-export default AddPetBtn;
+export default LaunchModalBtn;

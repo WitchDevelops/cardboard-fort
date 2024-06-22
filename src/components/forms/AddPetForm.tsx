@@ -9,7 +9,6 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -23,8 +22,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-
-import { toast } from '@/components/ui/use-toast';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { useToast } from '@/components/ui/use-toast';
 
 //date has to be in the YYYY-MM-DD format so that it's compatible with the format in the database
 const dateRegex =
@@ -63,144 +62,153 @@ export const AddPetForm = () => {
         'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F20787%2Fpexels-photo.jpg%3Fcs%3Dsrgb%26dl%3Danimal-cat-adorable-20787.jpg%26fm%3Djpg&f=1&nofb=1&ipt=4d8a50d5b1dba3e542085b753af676db95035adc6fc94508a7d81bbd730bd989&ipo=images',
     },
   });
-
+  const { toast } = useToast();
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    const success = await addPet(data);
+    try {
+      const success = await addPet(data);
+      if (success) {
+        console.log(
+          'Pet added! Empty cache and refresh to reflect the change.'
+        );
+        toast({
+          title: 'Pet added successfully!',
+        });
 
-    if (success) {
-      console.log('Pet added! No do a hard reload to see it');
-      //TODO: figure out why the toasts not appear
-      toast({
-        title: 'Pet added successfully!',
-      });
-    } else {
-      console.log('not added, some error');
+        //TODO: figure out how to update the list of pets
+        // database call is in the <PetGrid/> component, maybe useEffect there?
+      }
+    } catch (error) {
+      console.error('An error occurred while adding the pet:', error);
       toast({
         title: 'Error adding pet.',
-        description: 'Please try again later.',
       });
     }
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Pet Name*</FormLabel>
-              <FormControl>
-                <Input placeholder="Kitty" {...field} />
-              </FormControl>
-              <FormMessage className="text-danger" />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="species"
-          render={() => (
-            <FormItem>
-              <FormLabel>Species*</FormLabel>
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select species" />
-                </SelectTrigger>
-                <SelectContent className="bg-white">
-                  <SelectItem value="Cat">Cat</SelectItem>
-                  <SelectItem value="Dog">Dog</SelectItem>
-                  <SelectItem value="Other">Other...</SelectItem>
-                </SelectContent>
-              </Select>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="sex"
-          render={() => (
-            <FormItem>
-              <FormLabel>Sex</FormLabel>
-              <FormControl>
+    <ScrollArea className="h-[80vh] w-[100%]">
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="w-full space-y-6"
+        >
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Pet Name*</FormLabel>
+                <FormControl>
+                  <Input placeholder="Kitty" {...field} />
+                </FormControl>
+                <FormMessage className="text-danger" />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="species"
+            render={() => (
+              <FormItem>
+                <FormLabel>Species*</FormLabel>
                 <Select>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select" />
+                    <SelectValue placeholder="Select species" />
                   </SelectTrigger>
                   <SelectContent className="bg-white">
-                    <SelectItem value="male">Male</SelectItem>
-                    <SelectItem value="female">Female</SelectItem>
+                    <SelectItem value="Cat">Cat</SelectItem>
+                    <SelectItem value="Dog">Dog</SelectItem>
+                    <SelectItem value="Other">Other...</SelectItem>
                   </SelectContent>
                 </Select>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="neutered"
-          render={() => (
-            <FormItem>
-              <FormLabel>Neutered</FormLabel>
-              <FormControl>
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white">
-                    <SelectItem value="yes">Yes</SelectItem>
-                    <SelectItem value="no">No</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="dateOfBirth"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Date of Birth</FormLabel>
-              <FormControl>
-                <Input type="text" placeholder="YYYY-MM-DD" {...field} />
-              </FormControl>
-              <FormMessage className="text-danger" />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="breed"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Breed</FormLabel>
-              <FormControl>
-                <Input placeholder="European" {...field} />
-              </FormControl>
-              <FormMessage className="text-danger" />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="picture"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Picture</FormLabel>
-              <FormControl>
-                <Input placeholder="" {...field} />
-              </FormControl>
-              <FormMessage className="text-danger" />
-            </FormItem>
-          )}
-        />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="sex"
+            render={() => (
+              <FormItem>
+                <FormLabel>Sex</FormLabel>
+                <FormControl>
+                  <Select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white">
+                      <SelectItem value="male">Male</SelectItem>
+                      <SelectItem value="female">Female</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="neutered"
+            render={() => (
+              <FormItem>
+                <FormLabel>Neutered</FormLabel>
+                <FormControl>
+                  <Select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white">
+                      <SelectItem value="yes">Yes</SelectItem>
+                      <SelectItem value="no">No</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="dateOfBirth"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Date of Birth</FormLabel>
+                <FormControl>
+                  <Input type="text" placeholder="YYYY-MM-DD" {...field} />
+                </FormControl>
+                <FormMessage className="text-danger" />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="breed"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Breed</FormLabel>
+                <FormControl>
+                  <Input placeholder="European" {...field} />
+                </FormControl>
+                <FormMessage className="text-danger" />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="picture"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Picture</FormLabel>
+                <FormControl>
+                  <Input placeholder="" {...field} />
+                </FormControl>
+                <FormMessage className="text-danger" />
+              </FormItem>
+            )}
+          />
 
-        <Button type="submit">Submit</Button>
-      </form>
-    </Form>
+          <Button type="submit">Submit</Button>
+        </form>
+      </Form>
+    </ScrollArea>
   );
 };

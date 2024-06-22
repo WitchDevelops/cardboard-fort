@@ -3,24 +3,21 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { TbCirclePlus } from 'react-icons/tb';
+import { LaunchModalBtn } from '@/components/buttons/LaunchModalBtn';
 import { AddPetForm } from '@/components/forms/AddPetForm';
 
 export const AddPetModal = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="default" className="gap-2">
-          <TbCirclePlus /> <span>Add a new pet</span>
-        </Button>
+        {/* to have a reusable component for launching modals */}
+        <LaunchModalBtn title="Add a new pet" />
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] bg-white">
+      <DialogContent className="sm:max-w-[80vw] bg-white">
         <DialogHeader>
           <DialogTitle>Add new pet</DialogTitle>
           <DialogDescription>
