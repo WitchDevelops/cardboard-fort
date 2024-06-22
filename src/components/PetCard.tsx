@@ -44,7 +44,7 @@ export const PetCard = ({
       </>
     ) : null;
 
-  const date = new Date(date_of_birth).toLocaleDateString('en-US', {
+  const formattedDateOfBirth = new Date(date_of_birth).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -72,7 +72,7 @@ export const PetCard = ({
               )}
               <CardDescription className="flex items-center gap-1">
                 <TbClockHour3 />
-                {date}
+                {formattedDateOfBirth}
               </CardDescription>
             </div>
           </div>
