@@ -96,10 +96,10 @@ export const AddPetForm = () => {
           <FormField
             control={form.control}
             name="species"
-            render={() => (
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>Species*</FormLabel>
-                <Select>
+                <Select onValueChange={field.onChange}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select species" />
                   </SelectTrigger>
@@ -116,11 +116,11 @@ export const AddPetForm = () => {
           <FormField
             control={form.control}
             name="sex"
-            render={() => (
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>Sex</FormLabel>
                 <FormControl>
-                  <Select>
+                  <Select onValueChange={field.onChange}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
@@ -137,11 +137,11 @@ export const AddPetForm = () => {
           <FormField
             control={form.control}
             name="neutered"
-            render={() => (
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>Neutered</FormLabel>
                 <FormControl>
-                  <Select>
+                  <Select onValueChange={field.onChange}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
@@ -175,7 +175,7 @@ export const AddPetForm = () => {
             name="breed"
             placeholder="European"
             register={form.register}
-            error={form.formState.errors.name?.message}
+            error={form.formState.errors.breed?.message}
           />
 
           <TextInput
@@ -183,7 +183,7 @@ export const AddPetForm = () => {
             name="picture"
             placeholder="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F20787%2Fpexels-photo.jpg%3Fcs%3Dsrgb%26dl%3Danimal-cat-adorable-20787.jpg%26fm%3Djpg&f=1&nofb=1&ipt=4d8a50d5b1dba3e542085b753af676db95035adc6fc94508a7d81bbd730bd989&ipo=images"
             register={form.register}
-            error={form.formState.errors.name?.message}
+            error={form.formState.errors.picture?.message}
           />
 
           <Button type="submit">Submit</Button>
