@@ -3,8 +3,8 @@
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { addPet } from '@/data/pets/addPet';
 
+import { addPet } from '@/data/pets/addPet';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -15,16 +15,10 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useToast } from '@/components/ui/use-toast';
 import { TextInput } from '@/components/forms/TextInput';
+import { SelectInput } from '@/components/forms/SelectInput';
 
 //date has to be in the YYYY-MM-DD format so that it's compatible with the format in the database
 const dateRegex =
@@ -92,69 +86,41 @@ export const AddPetForm = () => {
             register={form.register}
             error={form.formState.errors.name?.message}
           />
-          {/* TODO: select fields are not being registered, despite having input selected they do not register (error pops up) */}
-          <FormField
-            control={form.control}
+
+          <SelectInput
+            label="Species*"
             name="species"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Species*</FormLabel>
-                <Select onValueChange={field.onChange}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select species" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white">
-                    <SelectItem value="Cat">Cat</SelectItem>
-                    <SelectItem value="Dog">Dog</SelectItem>
-                    <SelectItem value="Other">Other...</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage className="text-danger" />
-              </FormItem>
-            )}
+            options={[
+              { value: 'Cat', label: 'Cat' },
+              { value: 'Dog', label: 'Dog' },
+              { value: 'Other', label: 'Other...' },
+            ]}
+            register={form.register}
+            error={form.formState.errors.species?.message}
           />
-          <FormField
-            control={form.control}
+
+          <SelectInput
+            label="Sex"
             name="sex"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Sex</FormLabel>
-                <FormControl>
-                  <Select onValueChange={field.onChange}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-white">
-                      <SelectItem value="male">Male</SelectItem>
-                      <SelectItem value="female">Female</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-                <FormMessage className="text-danger" />
-              </FormItem>
-            )}
+            options={[
+              { value: 'male', label: 'Male' },
+              { value: 'female', label: 'Female' },
+            ]}
+            register={form.register}
+            error={form.formState.errors.sex?.message}
           />
-          <FormField
-            control={form.control}
+
+          <SelectInput
+            label="Neutered"
             name="neutered"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Neutered</FormLabel>
-                <FormControl>
-                  <Select onValueChange={field.onChange}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-white">
-                      <SelectItem value="yes">Yes</SelectItem>
-                      <SelectItem value="no">No</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-                <FormMessage className="text-danger" />
-              </FormItem>
-            )}
+            options={[
+              { value: 'no', label: 'No' },
+              { value: 'yes', label: 'Yes' },
+            ]}
+            register={form.register}
+            error={form.formState.errors.neutered?.message}
           />
+
           {/* TODO: refactor to use a date picker */}
           <FormField
             control={form.control}
