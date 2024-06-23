@@ -30,18 +30,7 @@ export const PetCard = ({
   gender,
   img,
 }: PetCardProps) => {
-  const genderDescription =
-    gender === 'male' ? (
-      <>
-        <TbGenderMale />
-        <span>MALE</span>
-      </>
-    ) : gender === 'female' ? (
-      <>
-        <TbGenderFemale />
-        <span>FEMALE</span>
-      </>
-    ) : null;
+  const isMale = gender === 'male';
 
   return (
     <Link href={`/pets/${name}`}>
@@ -58,11 +47,13 @@ export const PetCard = ({
             </CardTitle>
             <p>{breed}</p>
             <div className="flex justify-between items-center ">
-              {genderDescription && (
+              {gender ? (
                 <CardDescription className="flex items-center gap-1">
-                  {genderDescription}
+                  {isMale ? <TbGenderMale /> : <TbGenderFemale />}
+                  <span>{isMale ? 'Male' : 'Female'}</span>
                 </CardDescription>
-              )}
+              ) : null}
+
               <CardDescription className="flex items-center gap-1">
                 <TbClockHour3 />
                 {dateOfBirth}
