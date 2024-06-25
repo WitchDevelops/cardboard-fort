@@ -4,9 +4,10 @@
 
 import React from 'react';
 import { supabase } from '@/lib/supabase';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { formatDate } from '@/utils/date/formatDate';
-import { calculateAge } from '@/utils/date/calculateAge';
+import { PetTabs } from '@/components/PetTabs';
+// import 'tailwindcss/tailwind.css';
+import { Inter } from 'next/font/google';
+import '@/app/globals.css';
 export async function getStaticPaths() {
   const { data: pets, error } = await supabase.from('pets_data').select('name');
 
@@ -40,23 +41,9 @@ export async function getStaticProps({ params }) {
 }
 
 export default function PetPage({ pet }) {
-  const currentDate = new Date();
-  const formattedDateOfBirth = formatDate(pet.date_of_birth);
-  const age = calculateAge(pet.date_of_birth, currentDate);
+  console.log(`from name.js: ${pet}`);
   return (
     // TODO: refactor this into a separate component
-    <Card>
-      <CardHeader>
-        <CardTitle>{pet.name}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <p>Born on: {formattedDateOfBirth}</p>
-        <p>Age: {age}</p>
-        <p>Species: {pet.species}</p>
-        <p>Neutered: {pet.neutered ? 'Yes' : 'No'}</p>
-        <p>Bio: {pet.bio}</p>
-        {/* Add more pet data here */}
-      </CardContent>
-    </Card>
+    <PetTabs {...pet} />
   );
 }
