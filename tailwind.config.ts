@@ -19,7 +19,7 @@ const config = {
     },
     extend: {
       colors: {
-        primary: '#A47786',
+        primary: '#A37E57',
         secondary: '#9DB6CC',
         danger: '#E52B50',
         'primary-100': '#E4D4C8',
