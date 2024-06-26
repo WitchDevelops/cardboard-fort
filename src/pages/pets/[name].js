@@ -2,7 +2,12 @@
 //so that each pet has their own page with url: '/pets/[name]'
 //code thanks to Le Chat, I don't understand what's going on here
 
+
+import React from 'react';
 import { supabase } from '@/services/supabase';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { formatDate } from '@/utils/date/formatDate';
+import { calculateAge } from '@/utils/date/calculateAge';
 
 export async function getStaticPaths() {
   const { data: pets, error } = await supabase.from('pets_data').select('name');
@@ -36,10 +41,10 @@ export async function getStaticProps({ params }) {
   };
 }
 
-import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-
 export default function PetPage({ pet }) {
+  const currentDate = new Date();
+  const formattedDateOfBirth = formatDate(pet.date_of_birth);
+  const age = calculateAge(pet.date_of_birth, currentDate);
   return (
     // TODO: refactor this into a separate component
     <Card>
@@ -47,7 +52,8 @@ export default function PetPage({ pet }) {
         <CardTitle>{pet.name}</CardTitle>
       </CardHeader>
       <CardContent>
-        <p>Born on: {pet.dateOfBirth}</p>
+        <p>Born on: {formattedDateOfBirth}</p>
+        <p>Age: {age}</p>
         <p>Species: {pet.species}</p>
         <p>Neutered: {pet.neutered ? 'Yes' : 'No'}</p>
         <p>Bio: {pet.bio}</p>

@@ -14,23 +14,28 @@ import {
 } from 'react-icons/tb';
 import { font_accent } from '@/components/ui/fonts';
 import { PetCardImage } from '@/components/img/PetCardImage';
+import { calculateAge } from '@/utils/date/calculateAge';
 
 interface PetCardProps {
   name: string;
   breed?: string;
-  dateOfBirth: string;
   species: string;
   gender?: 'female' | 'male';
   img?: string;
+  date_of_birth: Date;
 }
+
 export const PetCard = ({
   name,
-  dateOfBirth,
   breed,
   gender,
   img,
+  date_of_birth,
 }: PetCardProps) => {
   const isMale = gender === 'male';
+
+  const currentDate = new Date();
+  const age = calculateAge(date_of_birth, currentDate);
 
   return (
     <Link href={`/pets/${name}`}>
@@ -56,7 +61,7 @@ export const PetCard = ({
 
               <CardDescription className="flex items-center gap-1">
                 <TbClockHour3 />
-                {dateOfBirth}
+                {age}
               </CardDescription>
             </div>
           </div>
