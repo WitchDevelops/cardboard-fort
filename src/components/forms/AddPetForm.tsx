@@ -57,6 +57,8 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
           title: 'Pet added successfully!',
           className: 'bg-white',
         });
+        //TODO: figure out how to update the list of pets
+        // database call is in the <PetGrid/> component, maybe useEffect there?
 
         onSuccess();
       }

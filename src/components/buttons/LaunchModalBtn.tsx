@@ -12,7 +12,7 @@ export const LaunchModalBtn = forwardRef<
 >(({ title, onClick }, ref) => {
   return (
     <Button ref={ref} onClick={onClick} className="gap-2">
-      <TbCirclePlus size={20} aria-label="Add Icon" /> {title}
+      <TbCirclePlus /> {title}
     </Button>
   );
 });
