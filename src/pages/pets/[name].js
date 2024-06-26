@@ -2,11 +2,13 @@
 //so that each pet has their own page with url: '/pets/[name]'
 //code thanks to Le Chat, I don't understand what's going on here
 
+
 import React from 'react';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/services/supabase';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { formatDate } from '@/utils/date/formatDate';
 import { calculateAge } from '@/utils/date/calculateAge';
+
 export async function getStaticPaths() {
   const { data: pets, error } = await supabase.from('pets_data').select('name');
 
