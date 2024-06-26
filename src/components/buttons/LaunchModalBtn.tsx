@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { TbCirclePlus } from 'react-icons/tb';
 
 interface LaunchModalBtnProps {
-  title: string,
+  onClick: () => void;
+  title: string;
 }
-export const LaunchModalBtn = ({title}: LaunchModalBtnProps) => {
+export const LaunchModalBtn = forwardRef<
+  HTMLButtonElement,
+  LaunchModalBtnProps
+>(({ title, onClick }, ref) => {
   return (
-    <Button className="gap-2">
-      <TbCirclePlus /> {title}
+    <Button ref={ref} onClick={onClick} className="gap-2">
+      <TbCirclePlus size={20} aria-label="Add Icon" /> {title}
     </Button>
   );
-};
-
-export default LaunchModalBtn;
+});

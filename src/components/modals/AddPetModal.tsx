@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -10,12 +11,13 @@ import {
 import { LaunchModalBtn } from '@/components/buttons/LaunchModalBtn';
 import { AddPetForm } from '@/components/forms/AddPetForm';
 
-export const AddPetModal = () => {
+export const AddPetModal: React.FC = () => {
+  const [open, setOpen] = useState(false);
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        {/* to have a reusable component for launching modals */}
-        <LaunchModalBtn title="Add a new pet" />
+        <LaunchModalBtn title="Add a new pet" onClick={() => setOpen(true)} />
       </DialogTrigger>
       <DialogContent className="sm:max-w-[80vw] bg-white">
         <DialogHeader>
@@ -24,7 +26,7 @@ export const AddPetModal = () => {
             Add a new pet. Fields marked with '*' are required.
           </DialogDescription>
         </DialogHeader>
-        <AddPetForm />
+        <AddPetForm onSuccess={() => setOpen(false)} />
       </DialogContent>
     </Dialog>
   );

@@ -27,41 +27,38 @@ const dateRegex =
 const FormSchema = z.object({
   name: z
     .string()
-    .min(2, {
-      message: 'Pet name must be at least 2 characters long.',
-    })
-    .max(50, {
-      message: 'Pet name cannot be longer than 50 characters.',
-    }),
+    .min(2, { message: 'Pet name must be at least 2 characters long.' })
+    .max(50, { message: 'Pet name cannot be longer than 50 characters.' }),
   species: z.string(),
-  dateOfBirth: z.string().regex(dateRegex, {
-    message: 'Please use the format YYYY-MM-DD.',
-  }),
+  dateOfBirth: z
+    .string()
+    .regex(dateRegex, { message: 'Please use the format YYYY-MM-DD.' }),
   breed: z.string(),
   picture: z.string(),
   sex: z.enum(['male', 'female']),
   neutered: z.enum(['yes', 'no']),
 });
 
-export const AddPetForm = () => {
+interface AddPetFormProps {
+  onSuccess: () => void;
+}
+
+export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
   const { toast } = useToast();
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
+
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     try {
       const success = await addPet(data);
       if (success) {
-        console.log(
-          'Pet added! Empty cache and refresh to reflect the change.'
-        );
         toast({
           title: 'Pet added successfully!',
           className: 'bg-white',
         });
 
-        //TODO: figure out how to update the list of pets
-        // database call is in the <PetGrid/> component, maybe useEffect there?
+        onSuccess();
       }
     } catch (error) {
       console.error('An error occurred while adding the pet:', error);
@@ -70,7 +67,7 @@ export const AddPetForm = () => {
         className: 'bg-danger',
       });
     }
-  }
+  };
 
   return (
     <ScrollArea className="h-[80vh] w-[100%]">
@@ -121,7 +118,6 @@ export const AddPetForm = () => {
             error={form.formState.errors.neutered?.message}
           />
 
-          {/* TODO: refactor to use a date picker */}
           <FormField
             control={form.control}
             name="dateOfBirth"
