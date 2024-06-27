@@ -23,6 +23,7 @@ interface PetCardProps {
   gender?: 'female' | 'male';
   img?: string;
   date_of_birth: Date;
+  id: string;
 }
 
 export const PetCard = ({
@@ -31,6 +32,7 @@ export const PetCard = ({
   gender,
   img,
   date_of_birth,
+  id,
 }: PetCardProps) => {
   const genderDescription =
     gender === 'male' ? (
@@ -49,7 +51,7 @@ export const PetCard = ({
   const age = calculateAge(date_of_birth, currentDate);
 
   return (
-    <Link href={`/pets/${name}`}>
+    <Link href={`/pets/${id}`}>
       <Card className="w-[300px] h-[350px] relative">
         <CardHeader>
           <PetCardImage img={img} alt={name} />

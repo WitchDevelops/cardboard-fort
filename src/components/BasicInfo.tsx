@@ -1,5 +1,4 @@
 import React from 'react';
-import { EditablePetInfo } from '@/components/EditablePetInfo';
 import { Tag } from '@/components/Tag';
 import { TextTile } from '@/components/layout/TextTile';
 import Image from 'next/image';
@@ -21,7 +20,38 @@ export const BasicInfo = ({ pet }: any) => {
         {/* <Image src={pet.img} alt={pet.name} width='100' height='200' /> */}
       </div>
       <TextTile style={{ gridColumn: '2/4' }}>
-        <EditablePetInfo pet={pet} />
+        <div className="flex flex-col justify-between h-full">
+          <div className="sm:grid grid-cols-2 gap-2">
+            <div className="flex flex-col">
+              <p className="font-bold">Pet Name:</p>
+              <p className="border px-2 py-1 rounded-md">{pet.name}</p>
+            </div>
+            <div className="flex flex-col">
+              <p className="font-bold">Microchip:</p>
+              <p className="border px-2 py-1 rounded-md">N/A</p>
+            </div>
+            <div className="flex flex-col">
+              <p className="font-bold">Species:</p>
+              <p className="border px-2 py-1 rounded-md">{pet.species}</p>
+            </div>
+            <div className="flex flex-col">
+              <p className="font-bold">Breed:</p>
+              <p className="border px-2 py-1 rounded-md">
+                {pet.breed || 'N/A'}
+              </p>
+            </div>
+            <div className="flex flex-col">
+              <p className="font-bold">Neutered:</p>
+              <p className="border px-2 py-1 rounded-md">
+                {pet.neutered ? 'Yes' : 'No'}
+              </p>
+            </div>
+            <div className="flex flex-col">
+              <p className="font-bold">Born on:</p>
+              <p className="border px-2 py-1 rounded-md">{pet.date_of_birth}</p>
+            </div>
+          </div>
+        </div>
       </TextTile>
       <TextTile style={{ gridColumn: '1/3' }}>
         <p className="font-bold text-md p-2">Description</p>

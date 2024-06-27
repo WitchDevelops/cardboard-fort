@@ -5,11 +5,10 @@
 import React from 'react';
 import { supabase } from '@/lib/supabase';
 import { PetTabs } from '@/components/PetTabs';
-// import 'tailwindcss/tailwind.css';
-import { Inter } from 'next/font/google';
 import '@/app/globals.css';
+import { ButtonsOnPetPage } from '@/components/ButtonsOnPetPage';
 export async function getStaticPaths() {
-  const { data: pets, error } = await supabase.from('pets_data').select('name');
+  const { data: pets, error } = await supabase.from('pets_data').select('id');
 
   if (error) {
     console.error(error);
@@ -17,7 +16,7 @@ export async function getStaticPaths() {
   }
 
   const paths = pets.map((pet) => ({
-    params: { name: pet.name },
+    params: { id: pet.id },
   }));
 
   return { paths, fallback: false };
@@ -27,7 +26,7 @@ export async function getStaticProps({ params }) {
   const { data: pet, error } = await supabase
     .from('pets_data')
     .select('*')
-    .eq('name', params.name)
+    .eq('id', params.id)
     .single();
 
   if (error) {
@@ -41,9 +40,10 @@ export async function getStaticProps({ params }) {
 }
 
 export default function PetPage({ pet }) {
-  console.log(`from name.js: ${pet}`);
   return (
-    // TODO: refactor this into a separate component
-    <PetTabs {...pet} />
+    <div className="w-[80vw] mx-auto">
+      <ButtonsOnPetPage />
+      <PetTabs {...pet} />
+    </div>
   );
 }

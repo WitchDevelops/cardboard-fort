@@ -16,7 +16,7 @@ interface PetTabsProps {
 export const PetTabs = (props: PetTabsProps) => {
   return (
     <div>
-      <Tabs defaultValue="basicInfo" className="w-[80vw] mx-auto">
+      <Tabs defaultValue="basicInfo">
         <TabsList>
           <TabsTrigger value="basicInfo">Basic Info</TabsTrigger>
           <TabsTrigger value="vaccinations">Vaccinations</TabsTrigger>
