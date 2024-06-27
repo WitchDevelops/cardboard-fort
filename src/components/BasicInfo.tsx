@@ -15,12 +15,16 @@ export const BasicInfo = ({ pet }: any) => {
     >
       <div
         className="rounded-xl shadow-md aspect-auto overflow-hidden"
-        style={{ gridColumn: '1/2' }}
+        style={{ gridColumn: '1/2', maxWidth: '200px' }}
       >
-        <img className="object-cover" src={pet.img} />
-        {/* TODO: use <Image> */}
-        {/* problem: unconfigured host, look into that */}
-        {/* <Image src={pet.img} alt={pet.name} width='100' height='200' /> */}
+        <div className="relative w-full h-full">
+          <Image
+            src={pet.img}
+            alt={pet.name}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        </div>
       </div>
       <TextTile style={{ gridColumn: '2/4' }}>
         <div className="flex flex-col justify-between h-full">
@@ -51,7 +55,9 @@ export const BasicInfo = ({ pet }: any) => {
             </div>
             <div className="flex flex-col">
               <p className="font-bold">Born on:</p>
-              <p className="border px-2 py-1 rounded-md">{formattedDateOfBirth}</p>
+              <p className="border px-2 py-1 rounded-md">
+                {formattedDateOfBirth}
+              </p>
             </div>
           </div>
         </div>
