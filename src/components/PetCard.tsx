@@ -13,38 +13,34 @@ import {
   TbAlertCircle,
 } from 'react-icons/tb';
 import { font_accent } from '@/components/ui/fonts';
-import { PetCardImage } from './img/PetCardImage';
+import { PetCardImage } from '@/components/img/PetCardImage';
+import { calculateAge } from '@/utils/date/calculateAge';
 
 interface PetCardProps {
   name: string;
   breed?: string;
-  dateOfBirth: string;
   species: string;
-  gender?: string;
+  gender?: 'female' | 'male';
   img?: string;
+  date_of_birth: Date;
+  id: string;
 }
+
 export const PetCard = ({
   name,
-  dateOfBirth,
   breed,
   gender,
   img,
+  date_of_birth,
+  id,
 }: PetCardProps) => {
-  const genderDescription =
-    gender === 'male' ? (
-      <>
-        <TbGenderMale />
-        <span>MALE</span>
-      </>
-    ) : gender === 'female' ? (
-      <>
-        <TbGenderFemale />
-        <span>FEMALE</span>
-      </>
-    ) : null;
+  const isMale = gender === 'male';
+
+  const currentDate = new Date();
+  const age = calculateAge(date_of_birth, currentDate);
 
   return (
-    <Link href={`/pets/${name}`}>
+    <Link href={`/pets/${id}`}>
       <Card className="w-[300px] h-[350px] relative">
         <CardHeader>
           <PetCardImage img={img} alt={name} />
@@ -58,14 +54,16 @@ export const PetCard = ({
             </CardTitle>
             <p>{breed}</p>
             <div className="flex justify-between items-center ">
-              {genderDescription && (
+              {gender ? (
                 <CardDescription className="flex items-center gap-1">
-                  {genderDescription}
+                  {isMale ? <TbGenderMale /> : <TbGenderFemale />}
+                  <span>{isMale ? 'Male' : 'Female'}</span>
                 </CardDescription>
-              )}
+              ) : null}
+
               <CardDescription className="flex items-center gap-1">
                 <TbClockHour3 />
-                {dateOfBirth}
+                {age}
               </CardDescription>
             </div>
           </div>
