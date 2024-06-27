@@ -1,0 +1,14 @@
+.doors-of-durin {
+  background-image: url('https://tolkiengateway.net/w/images/e/ea/J.R.R._Tolkien_-_Doors_of_Durin.jpg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  main {
+    background-color: #ffffff72;
+    padding: 3rem;
+    border-radius: 1rem;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    border: 1px solid black;
+  }
+}
