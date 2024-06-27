@@ -2,11 +2,10 @@
 //so that each pet has their own page with url: '/pets/[name]'
 //code thanks to Le Chat, I don't understand what's going on here
 
-
 import React from 'react';
+import '@/app/globals.css';
 import { supabase } from '@/services/supabase';
 import { PetTabs } from '@/components/PetTabs';
-import '@/app/globals.css';
 import { ButtonsOnPetPage } from '@/components/ButtonsOnPetPage';
 
 export async function getStaticPaths() {

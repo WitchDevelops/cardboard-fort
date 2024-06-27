@@ -2,9 +2,12 @@ import React from 'react';
 import { Tag } from '@/components/Tag';
 import { TextTile } from '@/components/layout/TextTile';
 import Image from 'next/image';
+import { formatDate } from '@/utils/date/formatDate';
 
 // TODO: type the interface
+
 export const BasicInfo = ({ pet }: any) => {
+  const formattedDateOfBirth = formatDate(pet.date_of_birth);
   return (
     <div
       className="sm:grid grid-cols-2 gap-4"
@@ -48,7 +51,7 @@ export const BasicInfo = ({ pet }: any) => {
             </div>
             <div className="flex flex-col">
               <p className="font-bold">Born on:</p>
-              <p className="border px-2 py-1 rounded-md">{pet.date_of_birth}</p>
+              <p className="border px-2 py-1 rounded-md">{formattedDateOfBirth}</p>
             </div>
           </div>
         </div>
