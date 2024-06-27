@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 
+//TODO: define type 'pet' in a separate file and import it here
 interface EditablePetInfoProps {
   pet: {
     name: string;
@@ -46,26 +47,29 @@ export const EditablePetInfo = ({ pet }: EditablePetInfoProps) => {
   if (isEditing) {
     return (
       // TODO: make it look nicer, maybe use a component or something
-      <form>
-        <label>
-          Pet Name:
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          Breed:
-          <input
-            type="text"
-            name="breed"
-            value={formData.breed || ''}
-            onChange={handleInputChange}
-          />
-        </label>
-        {/* <label>
+      <form className="flex flex-col justify-between h-full">
+        <div className="sm:grid grid-cols-2 gap-2">
+          <div className="flex flex-col">
+            <label className="font-bold">Pet Name:</label>
+            <input
+              className="border px-2 py-1 rounded-md"
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+            />
+          </div>
+
+          <label>
+            Breed:
+            <input
+              type="text"
+              name="breed"
+              value={formData.breed || ''}
+              onChange={handleInputChange}
+            />
+          </label>
+          {/* <label>
           Date of Birth:
           <input
             type="date"
@@ -74,27 +78,30 @@ export const EditablePetInfo = ({ pet }: EditablePetInfoProps) => {
             onChange={handleInputChange}
           />
         </label> */}
-        <label>
-          Species:
-          <input
-            type="text"
-            name="species"
-            value={formData.species}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          Neutered:
-          <input
-            type="checkbox"
-            name="neutered"
-            checked={formData.neutered}
-            onChange={handleCheckboxChange}
-          />
-        </label>
-        <button type="button" onClick={handleSaveClick}>
-          Save
-        </button>
+          <label>
+            Species:
+            <input
+              type="text"
+              name="species"
+              value={formData.species}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Neutered:
+            <input
+              type="checkbox"
+              name="neutered"
+              checked={formData.neutered}
+              onChange={handleCheckboxChange}
+            />
+          </label>
+        </div>
+        <div className="flex justify-end mt-4">
+          <Button className="text-white" onClick={handleSaveClick}>
+            Save
+          </Button>
+        </div>
       </form>
     );
   }
