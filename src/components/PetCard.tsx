@@ -34,18 +34,7 @@ export const PetCard = ({
   date_of_birth,
   id,
 }: PetCardProps) => {
-  const genderDescription =
-    gender === 'male' ? (
-      <>
-        <TbGenderMale />
-        <span>MALE</span>
-      </>
-    ) : gender === 'female' ? (
-      <>
-        <TbGenderFemale />
-        <span>FEMALE</span>
-      </>
-    ) : null;
+  const isMale = gender === 'male';
 
   const currentDate = new Date();
   const age = calculateAge(date_of_birth, currentDate);
@@ -65,11 +54,13 @@ export const PetCard = ({
             </CardTitle>
             <p>{breed}</p>
             <div className="flex justify-between items-center ">
-              {genderDescription && (
+              {gender ? (
                 <CardDescription className="flex items-center gap-1">
-                  {genderDescription}
+                  {isMale ? <TbGenderMale /> : <TbGenderFemale />}
+                  <span>{isMale ? 'Male' : 'Female'}</span>
                 </CardDescription>
-              )}
+              ) : null}
+
               <CardDescription className="flex items-center gap-1">
                 <TbClockHour3 />
                 {age}
