@@ -20,10 +20,15 @@ const config = {
     extend: {
       colors: {
         primary: '#A37E57',
-        secondary: '#9DB6CC',
+        secondary: '#005F54',
         danger: '#E52B50',
         'primary-100': '#E4D4C8',
         'primary-500': '#533440',
+        'primary-hover': '#89633B',
+        'secondary-100': '#DCE9E8',
+        'secondary-200': '#BDE1DD',
+        'secondary-600': '#65C5BA',
+        'secondary-800': '#3f9286',
         'white-100': '#f8f9fd',
         'white-400': '#d8d8d8',
         black: '#0f0f0f',
