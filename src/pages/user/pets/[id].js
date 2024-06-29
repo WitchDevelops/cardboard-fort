@@ -5,6 +5,8 @@
 import React from 'react';
 import '@/app/globals.css';
 import { supabase } from '@/services/supabase';
+
+import { BreadCrumbs } from '@/components/BreadCrumbs';
 import { PetTabs } from '@/components/PetTabs';
 import { ButtonsOnPetPage } from '@/components/ButtonsOnPetPage';
 
@@ -43,6 +45,9 @@ export async function getStaticProps({ params }) {
 export default function PetPage({ pet }) {
   return (
     <div className="w-[80vw] mx-auto">
+      <div>
+        <BreadCrumbs />
+      </div>
       <ButtonsOnPetPage />
       <PetTabs {...pet} />
     </div>
