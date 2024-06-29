@@ -15,7 +15,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { useToast } from '@/components/ui/use-toast';
 import { TextInput } from '@/components/forms/TextInput';
 import { SelectInput } from '@/components/forms/SelectInput';
@@ -72,12 +71,12 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
   };
 
   return (
-    <ScrollArea className="h-[80vh] w-[100%]">
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full space-y-6"
-        >
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="w-full space-y-6 "
+      >
+        <div className="lg:grid lg:grid-cols-2 gap-4">
           <TextInput
             label="Pet Name*"
             name="name"
@@ -149,10 +148,11 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
             register={form.register}
             error={form.formState.errors.picture?.message}
           />
-
-          <Button type="submit">Submit</Button>
-        </form>
-      </Form>
-    </ScrollArea>
+        </div>
+        <Button className="w-full lg:block lg:ms-auto lg:w-auto" type="submit">
+          Submit
+        </Button>
+      </form>
+    </Form>
   );
 };
