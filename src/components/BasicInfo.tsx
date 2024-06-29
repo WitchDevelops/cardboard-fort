@@ -15,16 +15,15 @@ export const BasicInfo = ({ pet }: any) => {
     >
       <div
         className="rounded-xl shadow-md aspect-auto overflow-hidden"
-        style={{ gridColumn: '1/2', maxWidth: '200px' }}
+        style={{ gridColumn: '1/2' }}
       >
-        <div className="relative w-full h-full">
-          <Image
-            src={pet.img}
-            alt={pet.name}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-        </div>
+        <Image
+          src={pet.img}
+          alt={pet.name}
+          height={200}
+          width={100}
+          layout="responsive"
+        />
       </div>
       <TextTile style={{ gridColumn: '2/4' }}>
         <div className="flex flex-col justify-between h-full">
