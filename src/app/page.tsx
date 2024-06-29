@@ -1,20 +1,25 @@
 import { PetGrid } from '@/components/PetGrid';
 import { AddPetModal } from '@/components/modals/AddPetModal';
 import { Toaster } from '@/components/ui/toaster';
+import { font_accent } from '@/components/ui/fonts';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import '@/app/styles/main.scss';
 
 export default function Home() {
   return (
-    <>
-      <header className="flex justify-end p-5 px-24">
-        {/* ShadCN's modal component has the button that calls the modal inside the modalcomponent, which can be confusing */}
-        {/* that's why there is a AddPetModal here, and not the button */}
-        {/* https://ui.shadcn.com/docs/components/dialog */}
-        <AddPetModal />
-      </header>
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <PetGrid />
+    <div className="grid place-items-center h-[100vh] text-center doors-of-durin">
+      <main className="text-center">
+        <h1 className={`${font_accent.className} font-semibold text-3xl`}>
+          Pet app home page
+        </h1>
+        <div>
+          <p>Speak, friend, and</p>
+          <Link href="user">
+            <Button>Enter</Button>
+          </Link>
+        </div>
       </main>
-      <Toaster />
-    </>
+    </div>
   );
 }
