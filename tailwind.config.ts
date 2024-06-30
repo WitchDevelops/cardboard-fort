@@ -38,6 +38,9 @@ const config = {
         md: '0.6rem',
         sm: '0.3rem',
       },
+      maxWidth: {
+        xxl: '900px',
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],

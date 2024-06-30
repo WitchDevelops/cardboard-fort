@@ -10,17 +10,22 @@ export const BasicInfo = ({ pet }: any) => {
   const formattedDateOfBirth = formatDate(pet.date_of_birth);
   return (
     <div
-      className="sm:grid grid-cols-2 gap-4"
-      style={{ gridTemplateColumns: '1fr 1fr 1fr' }}
+      className="flex flex-col sm:grid grid-cols-2 gap-4"
+      style={{
+        gridTemplateColumns: 'repeat(3, 1fr)',
+      }}
     >
       <div
         className="rounded-xl shadow-md aspect-auto overflow-hidden"
         style={{ gridColumn: '1/2' }}
       >
-        <img className="object-cover" src={pet.img} />
-        {/* TODO: use <Image> */}
-        {/* problem: unconfigured host, look into that */}
-        {/* <Image src={pet.img} alt={pet.name} width='100' height='200' /> */}
+        <Image
+          src={pet.img}
+          alt={pet.name}
+          height={200}
+          width={100}
+          className="object-cover h-[100%] w-[100%]"
+        />
       </div>
       <TextTile style={{ gridColumn: '2/4' }}>
         <div className="flex flex-col justify-between h-full">
@@ -51,7 +56,9 @@ export const BasicInfo = ({ pet }: any) => {
             </div>
             <div className="flex flex-col">
               <p className="font-bold">Born on:</p>
-              <p className="border px-2 py-1 rounded-md">{formattedDateOfBirth}</p>
+              <p className="border px-2 py-1 rounded-md">
+                {formattedDateOfBirth}
+              </p>
             </div>
           </div>
         </div>

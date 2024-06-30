@@ -44,7 +44,7 @@ export async function getStaticProps({ params }) {
 
 export default function PetPage({ pet }) {
   return (
-    <div className="w-[80vw] mx-auto">
+    <div className="w-[80vw] max-w-[900px] m-auto">
       <div>
         <BreadCrumbs />
       </div>
