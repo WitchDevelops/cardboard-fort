@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { UnavailableImage } from './UnavailableImage';
+import { UnavailableImage } from '@/components/img/UnavailableImage';
 import Image from 'next/image';
 
 interface PetCardImageProps {
