@@ -10,8 +10,10 @@ export const BasicInfo = ({ pet }: any) => {
   const formattedDateOfBirth = formatDate(pet.date_of_birth);
   return (
     <div
-      className="sm:grid grid-cols-2 gap-4"
-      style={{ gridTemplateColumns: '1fr 1fr 1fr' }}
+      className="flex flex-col sm:grid grid-cols-2 gap-4"
+      style={{
+        gridTemplateColumns: 'repeat(3, 1fr)',
+      }}
     >
       <div
         className="rounded-xl shadow-md aspect-auto overflow-hidden"
@@ -22,7 +24,7 @@ export const BasicInfo = ({ pet }: any) => {
           alt={pet.name}
           height={200}
           width={100}
-          layout="responsive"
+          className="object-cover h-[100%] w-[100%]"
         />
       </div>
       <TextTile style={{ gridColumn: '2/4' }}>
