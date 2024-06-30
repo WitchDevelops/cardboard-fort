@@ -3,18 +3,15 @@
 //and the order in pet form is different
 //to make more sense to the user
 export const mapFormDataToDatabaseSchema = (formData: any) => {
-    const databasePetObject = {
-      name: formData.name,
-      date_of_birth: formData.dateOfBirth,
-      breed: formData.breed,
-      img: formData.picture,
-      vaccinations: formData.inputName5,
-      medicines: formData.inputName6,
-      gender: formData.sex,
-      neutered: formData.neutered,
-      species: formData.species,
-      bio: formData.inputName10,
-    };
-  
-    return databasePetObject;
+  const databasePetObject = {
+    name: formData.name,
+    date_of_birth: formData.dateOfBirth,
+    breed: formData.breed,
+    img: formData.picture,
+    sex: formData.sex,
+    neutered: formData.neutered,
+    species: formData.species,
   };
+
+  return databasePetObject;
+};

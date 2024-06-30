@@ -11,7 +11,9 @@ import { PetTabs } from '@/components/PetTabs';
 import { ButtonsOnPetPage } from '@/components/ButtonsOnPetPage';
 
 export async function getStaticPaths() {
-  const { data: pets, error } = await supabase.from('pets_data').select('id');
+  const { data: pets, error } = await supabase
+    .from('pets_data')
+    .select('pet_id');
 
   if (error) {
     console.error(error);
@@ -19,21 +21,29 @@ export async function getStaticPaths() {
   }
 
   const paths = pets.map((pet) => ({
-    params: { id: pet.id },
+    params: { pet_id: pet.pet_id },
   }));
 
   return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
-  const { data: pet, error } = await supabase
+  const { data: pet, error: petError } = await supabase
     .from('pets_data')
-    .select('*')
-    .eq('id', params.id)
+    .select(
+      `
+      *,
+      pets_more_info (
+        microchip_nr,
+        pet_bio
+      )
+    `
+    )
+    .eq('pet_id', params.pet_id)
     .single();
 
-  if (error) {
-    console.error(error);
+  if (petError) {
+    console.error(petError);
     return { notFound: true };
   }
 
@@ -43,6 +53,7 @@ export async function getStaticProps({ params }) {
 }
 
 export default function PetPage({ pet }) {
+  console.log(pet);
   return (
     <div className="w-[80vw] max-w-[900px] m-auto">
       <div>
