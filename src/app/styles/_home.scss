@@ -1,14 +1,157 @@
-.doors-of-durin {
-  background-image: url('https://tolkiengateway.net/w/images/e/ea/J.R.R._Tolkien_-_Doors_of_Durin.jpg');
+.main {
+  overflow: hidden;
+  position: relative;
+  border-image: fill 1
+    linear-gradient(
+      180deg,
+      rgba(216, 164, 111, 1) 0%,
+      rgba(168, 128, 88, 1) 57%,
+      rgba(141, 111, 82, 1) 88%
+    );
+}
+main {
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+.main-img {
+  position: relative;
+}
+.main-text {
+  gap: 1rem;
+}
+.main-img__blob {
+  background-size: cover;
   background-position: center;
-  background-size: contain;
   background-repeat: no-repeat;
+}
+.main-img__blob--first {
+  margin: 0 auto;
+  display: flex;
+  width: 300px;
+  height: 300px;
+  z-index: 50;
+  background-image: url(../../../public/pet-img/welcome-page.jpg);
+  background-size: cover;
+  mask-image: url(../../../public/pet-img/blob-1.svg);
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+.main-img__blob--second {
+  display: none;
+}
+
+.main-img__blob--third {
+  display: none;
+}
+.main-img__blob--fourth {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .main {
+    background-image: url(../../../public/pet-img/welcome-page.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-image: fill 1
+      linear-gradient(
+        180deg,
+        rgba(216, 164, 111, 0.9) 0%,
+        rgba(168, 128, 88, 0.9) 57%,
+        rgba(141, 111, 82, 0.9) 88%
+      );
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .main {
+    background-position: 50% 60%;
+  }
   main {
-    background-color: #ffffff72;
-    padding: 3rem;
-    border-radius: 1rem;
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
-    border: 1px solid black;
+    height: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-self: center;
+  }
+  .main-img__blob {
+    position: absolute;
+  }
+
+  .main-img__blob--first {
+    top: 10%;
+    left: 0;
+    width: 350px;
+    height: 350px;
+  }
+  .main-img__blob--second {
+    background-image: url(../../../public/pet-img/dog.jpg);
+    background-size: 90%;
+    display: block;
+    width: 400px;
+    height: 400px;
+    right: -10%;
+    z-index: 40;
+    mask-image: url(../../../public/pet-img/blob-2.svg);
+    mask-repeat: no-repeat;
+    mask-position: center;
+  }
+  .main-img__blob--third {
+    background-image: url(../../../public/pet-img/rabbit.jpg);
+    background-size: 60%;
+    background-position: center;
+    display: block;
+    width: 350px;
+    height: 350px;
+    left: 1%;
+    bottom: 20%;
+    z-index: 40;
+    mask-image: url(../../../public/pet-img/blob-3.svg);
+    mask-repeat: no-repeat;
+    mask-position: center;
+  }
+  .main-img__blob--fourth {
+    background-image: url(../../../public/pet-img/cat.jpg);
+    background-size: 80%;
+    display: block;
+    width: 600px;
+    height: 400px;
+    left: 1%;
+    bottom: -5%;
+    z-index: 40;
+    mask-image: url(../../../public/pet-img/blob-4.svg);
+    mask-repeat: no-repeat;
+    mask-position: center;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .main-img__blob {
+    position: absolute;
+  }
+
+  .main-img__blob--first {
+    top: 5%;
+    left: 0;
+  }
+  .main-img__blob--second {
+    right: -40%;
+    width: 550px;
+    height: 550px;
+  }
+  .main-img__blob--third {
+    left: 1%;
+    bottom: 20%;
+  }
+  .main-img__blob--fourth {
+    left: 5%;
+    bottom: -5%;
   }
 }
