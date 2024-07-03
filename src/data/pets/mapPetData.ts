@@ -4,7 +4,7 @@
 //to make more sense to the user
 export const mapFormDataToDatabaseSchema = (formData: any) => {
   const databasePetObject = {
-    name: formData.name,
+    pet_name: formData.petName,
     date_of_birth: formData.dateOfBirth,
     breed: formData.breed,
     img: formData.picture,

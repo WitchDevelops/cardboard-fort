@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { supabase } from '@/services/supabase';
 
 interface MedicationsProps {
@@ -6,7 +6,7 @@ interface MedicationsProps {
 }
 
 export const Medications: React.FC<MedicationsProps> = ({ pet_id }) => {
-  const [medications, setMedications] = React.useState<any[]>([]);
+  const [medications, setMedications] = useState<any[]>([]);
 
   React.useEffect(() => {
     const fetchMedications = async () => {

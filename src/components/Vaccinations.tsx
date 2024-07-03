@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { supabase } from '@/services/supabase';
 
 interface VaccinationsProps {
@@ -6,7 +6,7 @@ interface VaccinationsProps {
 }
 
 export const Vaccinations: React.FC<VaccinationsProps> = ({ pet_id }) => {
-  const [vaccinations, setVaccinations] = React.useState<any[]>([]);
+  const [vaccinations, setVaccinations] = useState<any[]>([]);
 
   React.useEffect(() => {
     const fetchVaccinations = async () => {
