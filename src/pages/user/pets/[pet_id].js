@@ -11,40 +11,58 @@ import { PetTabs } from '@/components/PetTabs';
 import { ButtonsOnPetPage } from '@/components/ButtonsOnPetPage';
 
 export async function getStaticPaths() {
-  const { data: pets, error } = await supabase.from('pets_data').select('id');
+  try {
+    const { data: pets, error } = await supabase
+      .from('pets_data')
+      .select('pet_id');
 
-  if (error) {
+    if (error) {
+      throw error;
+    }
+
+    const paths = pets.map((pet) => ({
+      params: { pet_id: pet.pet_id },
+    }));
+
+    return { paths, fallback: false };
+  } catch (error) {
     console.error(error);
     return { paths: [], fallback: false };
   }
-
-  const paths = pets.map((pet) => ({
-    params: { id: pet.id },
-  }));
-
-  return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
-  const { data: pet, error } = await supabase
-    .from('pets_data')
-    .select('*')
-    .eq('id', params.id)
-    .single();
+  try {
+    const { data: pet, error: petError } = await supabase
+      .from('pets_data')
+      .select(
+        `
+        *,
+        pets_more_info (
+          microchip_nr,
+          pet_bio
+        )
+      `
+      )
+      .eq('pet_id', params.pet_id)
+      .single();
 
-  if (error) {
+    if (petError) {
+      throw petError;
+    }
+
+    return {
+      props: { pet },
+    };
+  } catch (error) {
     console.error(error);
     return { notFound: true };
   }
-
-  return {
-    props: { pet },
-  };
 }
 
 export default function PetPage({ pet }) {
   return (
-    <div className="w-[80vw] mx-auto">
+    <div className="w-[80vw] max-w-[900px] m-auto">
       <div>
         <BreadCrumbs />
       </div>

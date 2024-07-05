@@ -1,19 +1,11 @@
 import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { BasicInfo } from '@/components/BasicInfo';
+import { PetData } from '@/utils/types/petData';
+import { Vaccinations } from '@/components/Vaccinations';
+import { Medications } from '@/components/Medications';
 
-interface PetTabsProps {
-  name: string;
-  breed?: string;
-  date_of_birth: Date;
-  species: string;
-  neutered: boolean;
-  bio: string;
-  gender?: 'female' | 'male';
-  img?: string;
-}
-
-export const PetTabs = (props: PetTabsProps) => {
+export const PetTabs: React.FC<PetData> = ({ ...pet }) => {
   return (
     <div>
       <Tabs defaultValue="basicInfo">
@@ -24,10 +16,14 @@ export const PetTabs = (props: PetTabsProps) => {
           <TabsTrigger value="appointments">Appointments</TabsTrigger>
         </TabsList>
         <TabsContent value="basicInfo">
-          <BasicInfo pet={props} />
+          <BasicInfo {...pet} />
         </TabsContent>
-        <TabsContent value="vaccinations">Vaccinations</TabsContent>
-        <TabsContent value="medications">Medications</TabsContent>
+        <TabsContent value="vaccinations">
+          <Vaccinations pet_id={pet.pet_id} />
+        </TabsContent>
+        <TabsContent value="medications">
+          <Medications pet_id={pet.pet_id} />
+        </TabsContent>
         <TabsContent value="appointments">Appointments</TabsContent>
       </Tabs>
     </div>
