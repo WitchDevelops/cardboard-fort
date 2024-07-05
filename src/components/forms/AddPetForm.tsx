@@ -24,7 +24,7 @@ const dateRegex =
   /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/;
 
 const FormSchema = z.object({
-  name: z
+  petName: z
     .string()
     .min(2, { message: 'Pet name must be at least 2 characters long.' })
     .max(50, { message: 'Pet name cannot be longer than 50 characters.' }),
@@ -79,10 +79,10 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
         <div className="lg:grid lg:grid-cols-2 gap-4">
           <TextInput
             label="Pet Name*"
-            name="name"
+            name="petName"
             placeholder="Kitty Cat"
             register={form.register}
-            error={form.formState.errors.name?.message}
+            error={form.formState.errors.petName?.message}
           />
 
           <SelectInput
