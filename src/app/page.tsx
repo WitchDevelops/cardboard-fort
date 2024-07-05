@@ -5,19 +5,16 @@ import '@/app/styles/main.scss';
 
 export default function Home() {
   return (
-    <div className="h-[100vh] w-full main">
+    <div className="h-[100vh] w-full home">
       <main className="text-center">
-        <div className="main-img main-content">
-          <div className="main-img__blob main-img__blob--first"></div>
-
-          <div className="main-img__blob main-img__blob--second"></div>
-
-          <div className="main-img__blob main-img__blob--third"></div>
-
-          <div className="main-img__blob main-img__blob--fourth"></div>
+        <div className="home-img home-content">
+          <div className="home-img__blob home-img__blob--first"></div>
+          <div className="home-img__blob home-img__blob--second"></div>
+          <div className="home-img__blob home-img__blob--third"></div>
+          <div className="home-img__blob home-img__blob--fourth"></div>
         </div>
 
-        <div className="main-text main-content">
+        <div className="home-text home-content">
           <h1
             className={`${font_accent.className} font-semibold text-4xl text-white-100`}
           >
