@@ -15,7 +15,7 @@ export default function Home() {
 
         <div className="gap-[1rem] home-content">
           <h1
-            className={`${font_accent.className} font-semibold text-4xl text-white-100`}
+            className={`${font_accent.className} text-5xl text-white-100`}
           >
             Welcome to Pet App
           </h1>

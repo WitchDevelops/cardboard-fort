@@ -46,7 +46,7 @@ export const PetCard = ({
           <PetCardImage img={img} alt={pet_name} />
           <div className="relative z-1 p-4 min-h-[33%] bg-black backdrop-blur-sm bg-opacity-60 rounded-b-xl flex flex-col justify-between">
             <CardTitle
-              className={`${font_accent.className} font-semibold text-3xl flex justify-between items-center`}
+              className={`${font_accent.className} text-3xl flex justify-between items-center`}
             >
               {pet_name}
 
