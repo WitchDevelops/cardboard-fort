@@ -48,9 +48,10 @@ export const PetCard = ({
             <CardTitle
               className={`${font_accent.className} font-semibold text-3xl flex justify-between items-center`}
             >
-              {pet_name}
-
-              <TbAlertCircle className="text-danger" />
+              <div className="text-ellipsis overflow-hidden whitespace-nowrap" title={pet_name}>{pet_name}</div>
+              <div>
+                <TbAlertCircle className="text-danger" />
+              </div>
             </CardTitle>
             <p>{breed}</p>
             <div className="flex justify-between items-center ">
