@@ -11,12 +11,13 @@ import {
 import { LaunchModalBtn } from '@/components/buttons/LaunchModalBtn';
 import { AddPetForm } from '@/components/forms/AddPetForm';
 import { font_accent } from '@/components/ui/fonts';
+import { PetData } from '@/utils/types/petData';
 
 type AddPetModalProps = {
-  onPetAdded: () => void;
+  onPetAdded: (newPet: PetData) => void;
 };
 
-export const AddPetModal: React.FC<AddPetModalProps> = ({onPetAdded}) => {
+export const AddPetModal: React.FC<AddPetModalProps> = ({ onPetAdded }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -35,7 +36,12 @@ export const AddPetModal: React.FC<AddPetModalProps> = ({onPetAdded}) => {
             Add a new pet. Fields marked with '*' are required.
           </DialogDescription>
         </DialogHeader>
-        <AddPetForm onSuccess={() => setOpen(false)} />
+        <AddPetForm
+          onSuccess={(newPet) => {
+            setOpen(false);
+            onPetAdded(newPet);
+          }}
+        />
       </DialogContent>
     </Dialog>
   );

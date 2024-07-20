@@ -18,6 +18,7 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
 import { TextInput } from '@/components/forms/TextInput';
 import { SelectInput } from '@/components/forms/SelectInput';
+import { PetData } from '@/utils/types/petData';
 
 //date has to be in the YYYY-MM-DD format so that it's compatible with the format in the database
 const dateRegex =
@@ -39,27 +40,25 @@ const FormSchema = z.object({
 });
 
 interface AddPetFormProps {
-  onSuccess: () => void;
+  onSuccess: (newPet: PetData) => void;
 }
 
 export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
+
   const { toast } = useToast();
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     try {
-      const success = await addPet(data);
-      if (success) {
+      const newPet = await addPet(data);
+      if (newPet) {
         toast({
           title: 'Pet added successfully!',
           className: 'bg-white',
         });
-        //TODO: figure out how to update the list of pets
-        // database call is in the <PetGrid/> component, maybe useEffect there?
-
-        onSuccess();
+        onSuccess(newPet);
       }
     } catch (error) {
       console.error('An error occurred while adding the pet:', error);

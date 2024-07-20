@@ -2,8 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import { PetGrid } from '@/components/PetGrid';
 import { AddPetModal } from '@/components/modals/AddPetModal';
+import { PetData } from '@/utils/types/petData';
 
 const page = () => {
+  const [pets, setPets] = useState<PetData[]>([]);
   const [petAdded, setPetAdded] = useState(false);
 
   useEffect(() => {
@@ -15,7 +17,7 @@ const page = () => {
         {/* ShadCN's modal component has the button that calls the modal inside the modalcomponent, which can be confusing */}
         {/* that's why there is a AddPetModal here, and not the button */}
         {/* https://ui.shadcn.com/docs/components/dialog */}
-        <AddPetModal onPetAdded={() => setPetAdded(true)} />
+        <AddPetModal onPetAdded={(newPet) => setPets(prevPets => [...prevPets, newPet])} />
       </div>
       <PetGrid refetch={petAdded} />
     </div>
