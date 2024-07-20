@@ -12,7 +12,11 @@ import { LaunchModalBtn } from '@/components/buttons/LaunchModalBtn';
 import { AddPetForm } from '@/components/forms/AddPetForm';
 import { font_accent } from '@/components/ui/fonts';
 
-export const AddPetModal: React.FC = () => {
+type AddPetModalProps = {
+  onPetAdded: () => void;
+};
+
+export const AddPetModal: React.FC<AddPetModalProps> = ({onPetAdded}) => {
   const [open, setOpen] = useState(false);
 
   return (
