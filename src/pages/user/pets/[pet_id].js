@@ -6,6 +6,7 @@ import React from 'react';
 import '@/app/globals.css';
 import { supabase } from '@/services/supabase';
 
+import { TopMenu } from '@/components/TopMenu';
 import { BreadCrumbs } from '@/components/BreadCrumbs';
 import { PetTabs } from '@/components/PetTabs';
 import { ButtonsOnPetPage } from '@/components/ButtonsOnPetPage';
@@ -63,11 +64,12 @@ export async function getStaticProps({ params }) {
 export default function PetPage({ pet }) {
   return (
     <div className="w-[80vw] max-w-[900px] m-auto">
-      <div>
+      <TopMenu />
+      <div className="mt-[40px]">
         <BreadCrumbs />
+        <ButtonsOnPetPage />
+        <PetTabs {...pet} />
       </div>
-      <ButtonsOnPetPage />
-      <PetTabs {...pet} />
     </div>
   );
 }
