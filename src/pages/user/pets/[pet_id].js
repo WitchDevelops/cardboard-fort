@@ -65,7 +65,7 @@ export default function PetPage({ pet }) {
   return (
     <div className="w-[80vw] max-w-[900px] m-auto">
       <TopMenu />
-      <div className="mt-[40px]">
+      <div className="mt-[20px]">
         <BreadCrumbs />
         <ButtonsOnPetPage />
         <PetTabs {...pet} />

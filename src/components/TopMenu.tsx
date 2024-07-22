@@ -14,14 +14,21 @@ import { font_accent } from '@/components/ui/fonts';
 import { TbSearch, TbBell, TbSettings, TbLogout } from 'react-icons/tb';
 
 export const TopMenu = () => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const searchQuery = event.currentTarget.elements.namedItem(
+      'searchBar'
+    ) as HTMLInputElement;
+    console.log(`search function triggered with ${searchQuery.value}`);
+  };
   return (
-    <nav className="flex py-2 px-4 gap-4 justify-between items-center rounded-lg bg-white shadow-md fixed top-0 z-10 w-[80vw] max-w-[900px]">
+    <nav className="flex py-2 gap-4 justify-between items-center w-100vw bg-white opacity-95 sticky top-3 z-10 ">
       <p
-        className={`${font_accent.className} min-w-fit self-end text-2xl text-primary`}
+        className={`${font_accent.className} hidden sm:block min-w-fit self-end text-2xl text-primary`}
       >
         Hi, John!
       </p>
-      <form className="w-full relative">
+      <form className="w-full relative" onSubmit={handleSubmit}>
         <Input
           className="rounded-full"
           name="searchBar"
@@ -30,6 +37,7 @@ export const TopMenu = () => {
         <Button
           className="absolute translate-y-[-50%] top-[50%] right-[10px] p-0"
           variant="ghost"
+          type="submit"
         >
           <TbSearch />
         </Button>

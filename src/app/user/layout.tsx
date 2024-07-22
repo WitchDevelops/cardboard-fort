@@ -6,7 +6,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="w-[80vw] max-w-[900px] m-auto">
       <TopMenu />
-      <div className="mt-60px]">
+      <div className="mt-[20px]">
         <BreadCrumbs />
         <main className="p-0">{children}</main>
       </div>
