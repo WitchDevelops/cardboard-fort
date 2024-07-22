@@ -49,7 +49,7 @@ export const PetCard = ({
               className={`${font_accent.className} font-semibold text-3xl flex justify-between items-center`}
             >
               <div
-                className="text-ellipsis overflow-hidden whitespace-nowrap"
+                className="truncate"
                 title={pet_name}
               >
                 {pet_name}
@@ -78,7 +78,7 @@ export const PetCard = ({
                 <CardDescription>
                   <TbClockHour3 className="icon-sm" />
                 </CardDescription>
-                <CardDescription className="overflow-hidden text-ellipsis whitespace-nowrap">
+                <CardDescription className="truncate">
                   {age}
                 </CardDescription>
               </div>
