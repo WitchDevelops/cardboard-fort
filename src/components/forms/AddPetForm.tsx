@@ -19,17 +19,16 @@ import { useToast } from '@/components/ui/use-toast';
 import { TextInput } from '@/components/forms/TextInput';
 import { SelectInput } from '@/components/forms/SelectInput';
 
-//date has to be in the YYYY-MM-DD format so that it's compatible with the format in the database
 const dateRegex =
   /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/;
 
 const FormSchema = z.object({
-  petName: z
+  pet_name: z
     .string()
     .min(2, { message: 'Pet name must be at least 2 characters long.' })
     .max(50, { message: 'Pet name cannot be longer than 50 characters.' }),
   species: z.string(),
-  dateOfBirth: z
+  date_of_birth: z
     .string()
     .regex(dateRegex, { message: 'Please use the format YYYY-MM-DD.' }),
   breed: z.string(),
@@ -56,9 +55,6 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
           title: 'Pet added successfully!',
           className: 'bg-white',
         });
-        //TODO: figure out how to update the list of pets
-        // database call is in the <PetGrid/> component, maybe useEffect there?
-
         onSuccess();
       }
     } catch (error) {
@@ -79,12 +75,11 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
         <div className="lg:grid lg:grid-cols-2 gap-4">
           <TextInput
             label="Pet Name*"
-            name="petName"
+            name="pet_name"
             placeholder="Kitty Cat"
             register={form.register}
-            error={form.formState.errors.petName?.message}
+            error={form.formState.errors.pet_name?.message}
           />
-
           <SelectInput
             label="Species*"
             name="species"
@@ -96,7 +91,6 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
             register={form.register}
             error={form.formState.errors.species?.message}
           />
-
           <SelectInput
             label="Sex"
             name="sex"
@@ -107,7 +101,6 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
             register={form.register}
             error={form.formState.errors.sex?.message}
           />
-
           <SelectInput
             label="Neutered"
             name="neutered"
@@ -118,10 +111,9 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
             register={form.register}
             error={form.formState.errors.neutered?.message}
           />
-
           <FormField
             control={form.control}
-            name="dateOfBirth"
+            name="date_of_birth"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Date of Birth</FormLabel>
@@ -132,7 +124,6 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
               </FormItem>
             )}
           />
-
           <TextInput
             label="Breed"
             name="breed"
@@ -140,11 +131,10 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
             register={form.register}
             error={form.formState.errors.breed?.message}
           />
-
           <TextInput
             label="Picture"
             name="picture"
-            placeholder="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F20787%2Fpexels-photo.jpg%3Fcs%3Dsrgb%26dl%3Danimal-cat-adorable-20787.jpg%26fm%3Djpg&f=1&nofb=1&ipt=4d8a50d5b1dba3e542085b753af676db95035adc6fc94508a7d81bbd730bd989&ipo=images"
+            placeholder="https://example.com/picture.jpg"
             register={form.register}
             error={form.formState.errors.picture?.message}
           />

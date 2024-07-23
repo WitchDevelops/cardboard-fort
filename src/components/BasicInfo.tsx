@@ -1,13 +1,13 @@
 import React from 'react';
 import { Tag } from '@/components/Tag';
 import { TextTile } from '@/components/layout/TextTile';
-import Image, { ImageProps } from 'next/image';
+import Image from 'next/image';
 import { UnavailableImage } from '@/components/img/UnavailableImage';
 import { formatDate } from '@/utils/date/formatDate';
-import { PetData } from '@/utils/types/petData';
+import { PetProps } from '@/types/global';
 
-export const BasicInfo: React.FC<PetData> = ({ ...pet }) => {
-  const { microchip_nr, pet_bio } = pet.pets_more_info || {};
+export const BasicInfo: React.FC<PetProps> = ({ ...pet }) => {
+  const { microchip_nr, pet_bio } = pet.pet_more_info || {};
   const formattedDateOfBirth = formatDate(pet.date_of_birth);
 
   return (

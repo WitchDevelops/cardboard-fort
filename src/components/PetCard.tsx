@@ -15,16 +15,7 @@ import {
 import { font_accent } from '@/components/ui/fonts';
 import { PetCardImage } from '@/components/img/PetCardImage';
 import { calculateAge } from '@/utils/date/calculateAge';
-
-interface PetCardProps {
-  pet_name: string;
-  breed?: string;
-  species: string;
-  sex?: 'female' | 'male';
-  img?: string;
-  date_of_birth: Date;
-  pet_id: string;
-}
+import { PetProps } from '@/types/global';
 
 export const PetCard = ({
   pet_name,
@@ -33,10 +24,11 @@ export const PetCard = ({
   img,
   date_of_birth,
   pet_id,
-}: PetCardProps) => {
+}: PetProps) => {
   const isMale = sex === 'male';
 
   const currentDate = new Date();
+
   const age = calculateAge(date_of_birth, currentDate);
 
   return (
@@ -48,10 +40,7 @@ export const PetCard = ({
             <CardTitle
               className={`${font_accent.className} text-3xl flex justify-between items-center`}
             >
-              <div
-                className="truncate"
-                title={pet_name}
-              >
+              <div className="truncate" title={pet_name}>
                 {pet_name}
               </div>
               <div>
@@ -78,9 +67,7 @@ export const PetCard = ({
                 <CardDescription>
                   <TbClockHour3 className="icon-sm" />
                 </CardDescription>
-                <CardDescription className="truncate">
-                  {age}
-                </CardDescription>
+                <CardDescription className="truncate">{age}</CardDescription>
               </div>
             </div>
           </div>
