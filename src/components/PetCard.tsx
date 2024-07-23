@@ -46,25 +46,42 @@ export const PetCard = ({
           <PetCardImage img={img} alt={pet_name} />
           <div className="relative z-1 p-4 min-h-[33%] bg-black backdrop-blur-sm bg-opacity-60 rounded-b-xl flex flex-col justify-between">
             <CardTitle
-              className={`${font_accent.className} font-semibold text-3xl flex justify-between items-center`}
+              className={`${font_accent.className} text-3xl flex justify-between items-center`}
             >
-              {pet_name}
-
-              <TbAlertCircle className="text-danger" />
+              <div
+                className="truncate"
+                title={pet_name}
+              >
+                {pet_name}
+              </div>
+              <div>
+                <TbAlertCircle className="text-danger" />
+              </div>
             </CardTitle>
             <p>{breed}</p>
-            <div className="flex justify-between items-center ">
+            <div className="flex justify-between items-center gap-3 uppercase">
               {sex ? (
                 <CardDescription className="flex items-center gap-1">
-                  {isMale ? <TbGenderMale /> : <TbGenderFemale />}
+                  {isMale ? (
+                    <TbGenderMale className="icon-sm" />
+                  ) : (
+                    <TbGenderFemale className="icon-sm" />
+                  )}
                   <span>{isMale ? 'Male' : 'Female'}</span>
                 </CardDescription>
               ) : null}
 
-              <CardDescription className="flex items-center gap-1">
-                <TbClockHour3 />
-                {age}
-              </CardDescription>
+              <div
+                className="flex items-center gap-1 overflow-hidden"
+                title={age}
+              >
+                <CardDescription>
+                  <TbClockHour3 className="icon-sm" />
+                </CardDescription>
+                <CardDescription className="truncate">
+                  {age}
+                </CardDescription>
+              </div>
             </div>
           </div>
         </CardHeader>
