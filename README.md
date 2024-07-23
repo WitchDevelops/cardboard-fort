@@ -1,36 +1,46 @@
-# This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app)
+# About
+It's a pet project (pun intended) that is meant to help pet owners (both indivual, as well as biggers ones, like shelters) keep up-to-date with their pet's health, medication, and appointments. It can also be useful for easily sharing your pet's data (feeding schedule, etc.) with your pet sitter.
 
-## Getting Started
+# Tech stack
 
-First, run the development server:
+<div align="center">
+  <img width="55" src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/nextjs-icon.svg"/>
+  <img width="55" src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/react.svg"/>
+  <img width="55" src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/typescript-icon.svg"/>
+  <img width="55" src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/tailwindcss-icon.svg"/>
+  <img width="55" src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/supabase-icon.svg"/>
+</div>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# See it live
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Deployed with Vercel: https://cardboard-fort.vercel.app/
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Basic features
+- stores and displays basic pet data (like: age, species, name)
+- allows to add/edit/remove pet data and pets (CRUD) (under development)
+- stores and displays vet appointments, vaccinations and medications info
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+In progress:
+- authentication
+- sends reminders for an upcoming appointment
+- has a photo gallery (uploading images, deleting images)
+- tracks walks (for dogs)
+- displays daily pet's fun fact
 
-## Learn More
+TODO:
+- naming the app
+- connecting custom domain
 
-To learn more about Next.js, take a look at the following resources:
+<!-- # Functional requirements -->
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<!-- write it up -->
+<!-- take the basic features and write it in a nice, structured way -->
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<!-- # Contributors -->
 
-## Deploy on Vercel
+<!-- write it up -->
+<!-- who did what, etc. -->
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Documentation
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+For full project documentation, check Wiki: https://github.com/WitchDevelops/cardboard-fort/wiki
