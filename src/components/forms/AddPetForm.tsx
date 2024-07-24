@@ -90,6 +90,10 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
             options={[
               { value: 'Cat', label: 'Cat' },
               { value: 'Dog', label: 'Dog' },
+              { value: 'Rabbit', label: 'Rabbit' },
+              { value: 'Hamster', label: 'Hamster' },
+              { value: 'Bird', label: 'Bird' },
+              { value: 'Guinea Pig', label: 'Guinea Pig' },
               { value: 'Other', label: 'Other...' },
             ]}
             register={form.register}

@@ -5,9 +5,9 @@ import { PetData } from '@/utils/types/petData';
 
 type PetGridProps = {
   refetch: boolean;
-}
+};
 
-export const PetGrid: React.FC<PetGridProps> = ({refetch}) => {
+export const PetGrid: React.FC<PetGridProps> = ({ refetch }) => {
   const [pets, setPets] = useState<PetData[]>([]);
 
   useEffect(() => {
@@ -19,10 +19,8 @@ export const PetGrid: React.FC<PetGridProps> = ({refetch}) => {
         console.error(error);
       }
     };
-  
     fetchPets();
   }, [refetch]);
-  
 
   return (
     <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xxl:grid-cols-5 gap-4">

@@ -40,6 +40,7 @@ export const AddPetModal: React.FC<AddPetModalProps> = ({ onPetAdded }) => {
           onSuccess={(newPet) => {
             setOpen(false);
             onPetAdded(newPet);
+            // onSuccess(newPet)
           }}
         />
       </DialogContent>
