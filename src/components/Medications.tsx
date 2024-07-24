@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+'use client';
+import React, { useState, useEffect } from 'react';
 import { supabase } from '@/services/supabase';
 
 interface MedicationsProps {
@@ -22,8 +23,11 @@ export const Medications: React.FC<MedicationsProps> = ({ pet_id }) => {
       }
     };
 
-    fetchMedications();
-  }, [pet_id]);
+    if (medications.length === 0) {
+      console.log(medications.length);
+      fetchMedications();
+    }
+  }, [pet_id, medications]);
 
   return (
     <div className="flex gap-4">
