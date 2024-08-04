@@ -1,11 +1,25 @@
+import { useEffect, useState } from 'react';
 import { PetCard } from '@/components/PetCard';
 import { getPets } from '@/data/pets/getPets';
 
-export const PetGrid = async () => {
-  const pets = await getPets();
-  if (!pets) {
-    return null;
-  }
+type PetGridProps = {
+  refetch: boolean;
+};
+
+export const PetGrid: React.FC<PetGridProps> = ({ refetch }) => {
+  const [pets, setPets] = useState<PetData[]>([]);
+
+  useEffect(() => {
+    const fetchPets = async () => {
+      try {
+        const petsData = await getPets();
+        setPets(petsData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchPets();
+  }, [refetch]);
 
   return (
     <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xxl:grid-cols-5 gap-4">

@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from 'react';
 import { supabase } from '@/services/supabase';
 
@@ -30,7 +31,7 @@ export const Vaccinations: React.FC<VaccinationsProps> = ({ pet_id }) => {
       {vaccinations.length > 0 ? (
         vaccinations.map((vaccination) => (
           <div
-            key={vaccination.id}
+            key={vaccination.vaxx_id}
             className="bg-slate-50 rounded-lg px-4 py-2"
           >
             <h3 className="font-bold text-md">{vaccination.vaxx_name}</h3>

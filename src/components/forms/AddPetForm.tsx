@@ -39,27 +39,25 @@ const FormSchema = z.object({
 });
 
 interface AddPetFormProps {
-  onSuccess: () => void;
+  onSuccess: (newPet: PetData) => void;
 }
 
 export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
+
   const { toast } = useToast();
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     try {
-      const success = await addPet(data);
-      if (success) {
+      const newPet = await addPet(data);
+      if (newPet) {
         toast({
           title: 'Pet added successfully!',
           className: 'bg-white',
         });
-        //TODO: figure out how to update the list of pets
-        // database call is in the <PetGrid/> component, maybe useEffect there?
-
-        onSuccess();
+        onSuccess(newPet);
       }
     } catch (error) {
       console.error('An error occurred while adding the pet:', error);
@@ -91,6 +89,10 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
             options={[
               { value: 'Cat', label: 'Cat' },
               { value: 'Dog', label: 'Dog' },
+              { value: 'Rabbit', label: 'Rabbit' },
+              { value: 'Hamster', label: 'Hamster' },
+              { value: 'Bird', label: 'Bird' },
+              { value: 'Guinea Pig', label: 'Guinea Pig' },
               { value: 'Other', label: 'Other...' },
             ]}
             register={form.register}
@@ -119,18 +121,13 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
             error={form.formState.errors.neutered?.message}
           />
 
-          <FormField
-            control={form.control}
+          {/* TODO: change it from string to type Date with a datepicker */}
+          <TextInput
+            label="Date of Birth"
             name="dateOfBirth"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Date of Birth</FormLabel>
-                <FormControl>
-                  <Input type="text" placeholder="YYYY-MM-DD" {...field} />
-                </FormControl>
-                <FormMessage className="text-danger" />
-              </FormItem>
-            )}
+            placeholder="YYYY-MM-DD"
+            register={form.register}
+            error={form.formState.errors.dateOfBirth?.message}
           />
 
           <TextInput

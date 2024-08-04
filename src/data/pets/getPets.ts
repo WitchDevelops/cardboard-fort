@@ -1,10 +1,12 @@
 import { supabase } from '@/services/supabase';
+import { PostgrestResponse } from '@supabase/supabase-js';
 
-export const getPets = async () => {
-  const { data: pets, error } = await supabase.from('pets_data').select('*');
+export const getPets = async (): Promise<PetData[]> => {
+  const { data: pets, error }: PostgrestResponse<PetData> = await supabase
+    .from('pets_data')
+    .select('*');
   if (error) {
-    console.log(error);
-    return null;
+    throw error;
   }
   return pets;
 };
