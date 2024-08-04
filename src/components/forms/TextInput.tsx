@@ -1,5 +1,5 @@
 import { Input } from '@/components/ui/input';
-import { UseFormRegister, FieldValues } from 'react-hook-form';
+import { UseFormRegisterReturn } from 'react-hook-form';
 import {
   FormItem,
   FormControl,
@@ -7,21 +7,21 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 
-interface TextInputProps<TFieldValues extends FieldValues> {
+interface TextInputProps {
   label: string;
-  name: keyof TFieldValues;
+  name: string;
   placeholder: string;
-  register: UseFormRegister<TFieldValues>;
+  register: UseFormRegisterReturn;
   error?: string;
 }
 
-export const TextInput = <TFieldValues extends FieldValues>({
+export const TextInput: React.FC<TextInputProps> = ({
   label,
   name,
   placeholder,
   register,
   error,
-}: TextInputProps<TFieldValues>) => {
+}) => {
   return (
     <FormItem>
       <FormLabel>{label}</FormLabel>

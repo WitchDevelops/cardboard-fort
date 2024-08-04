@@ -1,9 +1,6 @@
-'use client';
-
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-
 import { addPet } from '@/data/pets/addPet';
 import { Button } from '@/components/ui/button';
 import {
@@ -41,10 +38,7 @@ interface AddPetFormProps {
   onSuccess: () => void;
 }
 
-export const mapFormDataToPetProps = (
-  data: z.infer<typeof FormSchema>
-): PetProps => ({
-  petId: undefined,
+export const mapFormDataToPetProps = (data: z.infer<typeof FormSchema>) => ({
   petName: data.pet_name,
   dateOfBirth: data.date_of_birth,
   breed: data.breed,
@@ -52,7 +46,6 @@ export const mapFormDataToPetProps = (
   sex: data.sex,
   neutered: data.neutered,
   species: data.species,
-  petMoreInfo: undefined,
 });
 
 export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
@@ -79,6 +72,7 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
         className: 'bg-danger',
       });
     }
+    console.log(data);
   };
 
   return (
@@ -92,7 +86,7 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
             label="Pet Name*"
             name="pet_name"
             placeholder="Kitty Cat"
-            register={form.register}
+            register={form.register('pet_name')}
             error={form.formState.errors.pet_name?.message}
           />
           <SelectInput
@@ -103,7 +97,7 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
               { value: 'Dog', label: 'Dog' },
               { value: 'Other', label: 'Other...' },
             ]}
-            register={form.register}
+            register={form.register('species')}
             error={form.formState.errors.species?.message}
           />
           <SelectInput
@@ -113,7 +107,7 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
               { value: 'male', label: 'Male' },
               { value: 'female', label: 'Female' },
             ]}
-            register={form.register}
+            register={form.register('sex')}
             error={form.formState.errors.sex?.message}
           />
           <SelectInput
@@ -123,7 +117,7 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
               { value: 'no', label: 'No' },
               { value: 'yes', label: 'Yes' },
             ]}
-            register={form.register}
+            register={form.register('neutered')}
             error={form.formState.errors.neutered?.message}
           />
           <FormField
@@ -143,14 +137,14 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
             label="Breed"
             name="breed"
             placeholder="European"
-            register={form.register}
+            register={form.register('breed')}
             error={form.formState.errors.breed?.message}
           />
           <TextInput
             label="Picture"
             name="picture"
             placeholder="https://example.com/picture.jpg"
-            register={form.register}
+            register={form.register('picture')}
             error={form.formState.errors.picture?.message}
           />
         </div>

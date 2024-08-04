@@ -6,30 +6,33 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { UseFormRegister, FieldValues, Path } from 'react-hook-form';
+import { useFormContext, UseFormRegisterReturn } from 'react-hook-form';
 
-interface SelectInputProps<T extends FieldValues> {
+interface SelectInputProps {
   label: string;
-  name: Path<T>;
+  name: string;
   options: { value: string; label: string }[];
-  register: UseFormRegister<T>;
+  register: UseFormRegisterReturn;
   error?: string;
 }
 
-export const SelectInput = <T extends FieldValues>({
+export const SelectInput: React.FC<SelectInputProps> = ({
   label,
   name,
   options,
   register,
   error,
-}: SelectInputProps<T>) => {
-  const onChange = (value: string) => {
-    register(name).onChange({ target: { value } });
+}) => {
+  const { setValue } = useFormContext();
+
+  const handleChange = (value: string) => {
+    setValue(name, value);
   };
+
   return (
     <FormItem>
       <FormLabel>{label}</FormLabel>
-      <Select onValueChange={onChange}>
+      <Select onValueChange={handleChange}>
         <SelectTrigger>
           <SelectValue placeholder="Select" />
         </SelectTrigger>

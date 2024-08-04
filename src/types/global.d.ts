@@ -53,7 +53,7 @@ declare global {
   }
 
   interface PetDB {
-    pet_id?: string;
+    // pet_id?: string;
     pet_name: string;
     date_of_birth: string;
     breed?: string;
@@ -61,11 +61,11 @@ declare global {
     sex?: 'female' | 'male';
     neutered: 'yes' | 'no';
     species: string;
-    petMoreInfo?: PetMoreInfoProps;
+    // petMoreInfo?: PetMoreInfoProps;
   }
 
   interface PetProps {
-    petId?: string;
+    // petId?: string;
     petName: string;
     dateOfBirth: string;
     breed?: string;
@@ -73,7 +73,7 @@ declare global {
     sex?: 'female' | 'male';
     neutered: 'yes' | 'no';
     species: string;
-    petMoreInfo?: PetMoreInfoProps;
+    // petMoreInfo?: PetMoreInfoProps;
   }
 
   interface UserProps {

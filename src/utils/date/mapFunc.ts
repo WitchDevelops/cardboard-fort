@@ -21,7 +21,7 @@ export const mapToPetMedicationProps = (
 });
 
 export const mapFormDataToDatabaseSchema = (formData: PetProps): PetDB => ({
-  pet_id: formData.petId,
+  // pet_id: formData.petId,
   pet_name: formData.petName,
   date_of_birth: formData.dateOfBirth,
   breed: formData.breed,
@@ -29,10 +29,10 @@ export const mapFormDataToDatabaseSchema = (formData: PetProps): PetDB => ({
   sex: formData.sex,
   neutered: formData.neutered,
   species: formData.species,
-  petMoreInfo: formData.petMoreInfo,
+  // petMoreInfo: formData.petMoreInfo,
 });
 export const mapDatabaseToPetProps = (data: PetDB): PetProps => ({
-  petId: data.pet_id,
+  // petId: data.pet_id,
   petName: data.pet_name,
   dateOfBirth: data.date_of_birth,
   breed: data.breed,
@@ -40,5 +40,5 @@ export const mapDatabaseToPetProps = (data: PetDB): PetProps => ({
   sex: data.sex,
   neutered: data.neutered,
   species: data.species,
-  petMoreInfo: data.petMoreInfo,
+  // petMoreInfo: data.petMoreInfo,
 });
