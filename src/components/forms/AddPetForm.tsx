@@ -121,18 +121,13 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
             error={form.formState.errors.neutered?.message}
           />
 
-          <FormField
-            control={form.control}
+          {/* TODO: change it from string to type Date with a datepicker */}
+          <TextInput
+            label="Date of Birth"
             name="dateOfBirth"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Date of Birth</FormLabel>
-                <FormControl>
-                  <Input type="text" placeholder="YYYY-MM-DD" {...field} />
-                </FormControl>
-                <FormMessage className="text-danger" />
-              </FormItem>
-            )}
+            placeholder="YYYY-MM-DD"
+            register={form.register}
+            error={form.formState.errors.dateOfBirth?.message}
           />
 
           <TextInput
