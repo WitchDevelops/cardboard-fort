@@ -41,6 +41,20 @@ interface AddPetFormProps {
   onSuccess: () => void;
 }
 
+export const mapFormDataToPetProps = (
+  data: z.infer<typeof FormSchema>
+): PetProps => ({
+  petId: undefined,
+  petName: data.pet_name,
+  dateOfBirth: data.date_of_birth,
+  breed: data.breed,
+  img: data.picture,
+  sex: data.sex,
+  neutered: data.neutered,
+  species: data.species,
+  petMoreInfo: undefined,
+});
+
 export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -49,7 +63,8 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     try {
-      const success = await addPet(data);
+      const petProps = mapFormDataToPetProps(data);
+      const success = await addPet(petProps);
       if (success) {
         toast({
           title: 'Pet added successfully!',

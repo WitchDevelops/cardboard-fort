@@ -3,12 +3,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { BasicInfo } from '@/components/BasicInfo';
 import { Vaccinations } from '@/components/Vaccinations';
 import { Medications } from '@/components/Medications';
-import { PetProps } from '@/types/global';
 
 export const PetTabs: React.FC<PetProps> = ({ ...pet }) => {
   return (
     <div>
-      {pet.pet_id && (
+      {pet.petId && (
         <Tabs defaultValue="basicInfo">
           <TabsList>
             <TabsTrigger value="basicInfo">Basic Info</TabsTrigger>
@@ -21,10 +20,10 @@ export const PetTabs: React.FC<PetProps> = ({ ...pet }) => {
           </TabsContent>
 
           <TabsContent value="vaccinations">
-            <Vaccinations pet_id={pet.pet_id} />
+            <Vaccinations pet_id={pet.petId} />
           </TabsContent>
           <TabsContent value="medications">
-            <Medications pet_id={pet.pet_id} />
+            <Medications pet_id={pet.petId} />
           </TabsContent>
 
           <TabsContent value="appointments">Appointments</TabsContent>

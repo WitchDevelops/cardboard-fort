@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { supabase } from '@/services/supabase';
-import { PetIdProps, PetMedicationProps } from '@/types/global';
+import { PetIdProps } from '@/types/global';
+import { mapToPetMedicationProps } from '@/utils/date/mapFunc';
 
 export const Medications: React.FC<PetIdProps> = ({ pet_id }) => {
   const [medications, setMedications] = useState<PetMedicationProps[]>([]);
@@ -15,7 +16,10 @@ export const Medications: React.FC<PetIdProps> = ({ pet_id }) => {
       if (error) {
         console.error(error);
       } else {
-        setMedications(data);
+        const mappedData = (data as PetMedicationDB[]).map(
+          mapToPetMedicationProps
+        );
+        setMedications(mappedData);
       }
     };
 
@@ -27,14 +31,14 @@ export const Medications: React.FC<PetIdProps> = ({ pet_id }) => {
       {medications.length > 0 ? (
         medications.map((medication) => (
           <div
-            key={medication.med_id}
+            key={medication.medId}
             className="bg-slate-50 rounded-lg px-4 py-2"
           >
-            <h3 className="font-bold text-md">{medication.med_name}</h3>
-            <p>Dose: {medication.med_dose}</p>
-            <p>Frequency: {medication.med_frequency}</p>
-            <p>Start date: {medication.med_start_date}</p>
-            <p>End date: {medication.med_end_date}</p>
+            <h3 className="font-bold text-md">{medication.medName}</h3>
+            <p>Dose: {medication.medDose}</p>
+            <p>Frequency: {medication.medFrequency}</p>
+            <p>Start date: {medication.medStartDate}</p>
+            <p>End date: {medication.medEndDate}</p>
           </div>
         ))
       ) : (

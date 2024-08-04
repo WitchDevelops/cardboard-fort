@@ -4,11 +4,10 @@ import { TextTile } from '@/components/layout/TextTile';
 import Image from 'next/image';
 import { UnavailableImage } from '@/components/img/UnavailableImage';
 import { formatDate } from '@/utils/date/formatDate';
-import { PetProps } from '@/types/global';
 
 export const BasicInfo: React.FC<PetProps> = ({ ...pet }) => {
-  const { microchip_nr, pet_bio } = pet.pet_more_info || {};
-  const formattedDateOfBirth = formatDate(pet.date_of_birth);
+  const { microchip_nr, pet_bio } = pet.petMoreInfo || {};
+  const formattedDateOfBirth = formatDate(pet.dateOfBirth);
 
   return (
     <div
@@ -24,7 +23,7 @@ export const BasicInfo: React.FC<PetProps> = ({ ...pet }) => {
         {pet.img ? (
           <Image
             src={pet.img}
-            alt={pet.pet_name}
+            alt={pet.petName}
             height={400}
             width={200}
             className="object-cover h-[100%] w-[100%]"
@@ -39,7 +38,7 @@ export const BasicInfo: React.FC<PetProps> = ({ ...pet }) => {
           <div className="sm:grid grid-cols-2 gap-2">
             <div className="flex flex-col">
               <p className="font-bold">Pet Name:</p>
-              <p className="border px-2 py-1 rounded-md">{pet.pet_name}</p>
+              <p className="border px-2 py-1 rounded-md">{pet.petName}</p>
             </div>
             <div className="flex flex-col">
               <p className="font-bold">Microchip:</p>

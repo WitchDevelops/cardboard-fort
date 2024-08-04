@@ -15,33 +15,32 @@ import {
 import { font_accent } from '@/components/ui/fonts';
 import { PetCardImage } from '@/components/img/PetCardImage';
 import { calculateAge } from '@/utils/date/calculateAge';
-import { PetProps } from '@/types/global';
 
 export const PetCard = ({
-  pet_name,
+  petName,
   breed,
   sex,
   img,
-  date_of_birth,
-  pet_id,
+  dateOfBirth,
+  petId,
 }: PetProps) => {
   const isMale = sex === 'male';
 
   const currentDate = new Date();
 
-  const age = calculateAge(date_of_birth, currentDate);
+  const age = calculateAge(dateOfBirth, currentDate);
 
   return (
-    <Link href={`/user/pets/${pet_id}`}>
+    <Link href={`/user/pets/${petId}`}>
       <Card className="h-[350px] relative">
         <CardHeader>
-          <PetCardImage img={img} alt={pet_name} />
+          <PetCardImage img={img} alt={petName} />
           <div className="relative z-1 p-4 min-h-[33%] bg-black backdrop-blur-sm bg-opacity-60 rounded-b-xl flex flex-col justify-between">
             <CardTitle
               className={`${font_accent.className} text-3xl flex justify-between items-center`}
             >
-              <div className="truncate" title={pet_name}>
-                {pet_name}
+              <div className="truncate" title={petName}>
+                {petName}
               </div>
               <div>
                 <TbAlertCircle className="text-danger" />

@@ -6,25 +6,26 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { UseFormRegister, FieldValues, Path } from 'react-hook-form';
 
-interface SelectInputProps {
+interface SelectInputProps<T extends FieldValues> {
   label: string;
-  name: string;
+  name: Path<T>;
   options: { value: string; label: string }[];
-  register: any;
+  register: UseFormRegister<T>;
   error?: string;
 }
 
-export const SelectInput = ({
+export const SelectInput = <T extends FieldValues>({
   label,
   name,
   options,
   register,
   error,
-}: SelectInputProps) => {
-    const onChange = (value: string) => {
-        register?.(name, { value, shouldValidate: true });
-      };
+}: SelectInputProps<T>) => {
+  const onChange = (value: string) => {
+    register(name).onChange({ target: { value } });
+  };
   return (
     <FormItem>
       <FormLabel>{label}</FormLabel>

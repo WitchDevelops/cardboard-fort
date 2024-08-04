@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { supabase } from '@/services/supabase';
-import { PetVaccinationProps, PetIdProps } from '@/types/global';
+import { PetIdProps } from '@/types/global';
+import { mapToPetVaccinationProps } from '@/utils/date/mapFunc';
 
 export const Vaccinations: React.FC<PetIdProps> = ({ pet_id }) => {
   const [vaccinations, setVaccinations] = useState<PetVaccinationProps[]>([]);
@@ -15,7 +16,10 @@ export const Vaccinations: React.FC<PetIdProps> = ({ pet_id }) => {
       if (error) {
         console.error(error);
       } else {
-        setVaccinations(data);
+        const mappedData = (data as PetVaccinationDB[]).map(
+          mapToPetVaccinationProps
+        );
+        setVaccinations(mappedData);
       }
     };
 
@@ -27,11 +31,11 @@ export const Vaccinations: React.FC<PetIdProps> = ({ pet_id }) => {
       {vaccinations.length > 0 ? (
         vaccinations.map((vaccination) => (
           <div
-            key={vaccination.vaxx_id}
+            key={vaccination.vaxxId}
             className="bg-slate-50 rounded-lg px-4 py-2"
           >
-            <h3 className="font-bold text-md">{vaccination.vaxx_name}</h3>
-            <p>Date: {vaccination.vaxx_date}</p>
+            <h3 className="font-bold text-md">{vaccination.vaxxName}</h3>
+            <p>Date: {vaccination.vaxxDate}</p>
             {/* Add more vaccination details here */}
           </div>
         ))

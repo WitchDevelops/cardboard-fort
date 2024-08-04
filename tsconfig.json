@@ -27,6 +27,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/types/global.d.ts",
+    "global.d.ts",
     "src/pages/user/pets/[pet_id].js"
   ],
   "exclude": ["node_modules"]
