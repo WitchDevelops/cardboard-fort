@@ -1,11 +1,15 @@
 import { supabase } from '@/services/supabase';
 import { mapFormDataToDatabaseSchema } from '@/data/pets/mapPetData';
-import { PetData } from '@/utils/types/petData';
+import { PostgrestSingleResponse } from '@supabase/supabase-js';
 
-export const addPet = async (formData: any): Promise<PetData> => {
+export const addPet = async (formData: AddPetFormData): Promise<PetData> => {
   try {
     const databasePetObject = mapFormDataToDatabaseSchema(formData);
-    const { data, error } = await supabase.from('pets_data').insert(databasePetObject).select().single();
+    const { data, error }: PostgrestSingleResponse<PetData> = await supabase
+      .from('pets_data')
+      .insert(databasePetObject)
+      .select()
+      .single();
     if (error) {
       throw new Error(error.message);
     }

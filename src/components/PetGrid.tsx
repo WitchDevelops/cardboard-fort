@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PetCard } from '@/components/PetCard';
 import { getPets } from '@/data/pets/getPets';
-import { PetData } from '@/utils/types/petData';
 
 type PetGridProps = {
   refetch: boolean;

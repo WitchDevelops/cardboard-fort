@@ -2,7 +2,7 @@
 //because the database needs a new entity to be in the same order as the schema
 //and the order in pet form is different
 //to make more sense to the user
-export const mapFormDataToDatabaseSchema = (formData: any) => {
+export const mapFormDataToDatabaseSchema = (formData: AddPetFormData) => {
   const databasePetObject = {
     pet_name: formData.petName,
     date_of_birth: formData.dateOfBirth,

@@ -18,7 +18,6 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
 import { TextInput } from '@/components/forms/TextInput';
 import { SelectInput } from '@/components/forms/SelectInput';
-import { PetData } from '@/utils/types/petData';
 
 //date has to be in the YYYY-MM-DD format so that it's compatible with the format in the database
 const dateRegex =

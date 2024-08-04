@@ -1,9 +1,10 @@
 import { supabase } from '@/services/supabase';
-import { PetData } from '@/utils/types/petData';
+import { PostgrestSingleResponse } from '@supabase/supabase-js';
 
 export async function getPetData(pet_id: string): Promise<PetData | null> {
-    try {
-      const { data: petData, error: petError } = await supabase
+  try {
+    const { data: petData, error: petError }: PostgrestSingleResponse<PetData> =
+      await supabase
         .from('pets_data')
         .select(
           `
@@ -16,14 +17,14 @@ export async function getPetData(pet_id: string): Promise<PetData | null> {
         )
         .eq('pet_id', pet_id)
         .single();
-  
-      if (petError) {
-        throw petError;
-      }
-  
-      return petData;
-    } catch (error) {
-      console.error(error);
-      return null;
+
+    if (petError) {
+      throw petError;
     }
+
+    return petData;
+  } catch (error) {
+    console.error(error);
+    return null;
   }
+}
