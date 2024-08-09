@@ -18,6 +18,7 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
 import { TextInput } from '@/components/forms/TextInput';
 import { SelectInput } from '@/components/forms/SelectInput';
+import { DatePicker } from '@/components/forms/DatePicker';
 
 //date has to be in the YYYY-MM-DD format so that it's compatible with the format in the database
 const dateRegex =
@@ -129,6 +130,8 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
             register={form.register}
             error={form.formState.errors.dateOfBirth?.message}
           />
+
+          <DatePicker  />
 
           <TextInput
             label="Breed"

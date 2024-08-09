@@ -14,7 +14,7 @@ declare interface PetData {
 declare interface AddPetFormData {
   petName: string;
   species: string;
-  dateOfBirth: string;
+  dateOfBirth: date;
   breed: string;
   picture?: string;
   sex?: 'male' | 'female';
