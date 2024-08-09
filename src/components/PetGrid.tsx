@@ -22,7 +22,7 @@ export const PetGrid: React.FC<PetGridProps> = ({ refetch }) => {
   }, [refetch]);
 
   return (
-    <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xxl:grid-cols-5 gap-4">
+    <div className="flex flex-col sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xxl:grid-cols-5 gap-4 py-4">
       {pets.map((pet) => (
         <PetCard key={pet.pet_id} {...pet} />
       ))}
