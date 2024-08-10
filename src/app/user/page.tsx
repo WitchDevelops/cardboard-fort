@@ -25,7 +25,8 @@ const page = () => {
           }}
         />
       </div>
-      <PetGrid refetch={petAdded}  />
+
+      <PetGrid refetch={petAdded} />
     </div>
   );
 };
