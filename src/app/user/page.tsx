@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { PetGrid } from '@/components/PetGrid';
 import { AddPetModal } from '@/components/modals/AddPetModal';
 import { PetData } from '@/utils/types/petData';
+import { Loader } from '@/components/Loader';
+import { Suspense } from 'react';
 
 const page = () => {
   const [pets, setPets] = useState<PetData[]>([]);
@@ -25,8 +27,11 @@ const page = () => {
           }}
         />
       </div>
+      <Suspense fallback={<Loader />}>
+        <PetGrid refetch={petAdded} />
+      </Suspense>
 
-      <PetGrid refetch={petAdded} />
+      {/* <PetGrid refetch={petAdded} /> */}
     </div>
   );
 };

@@ -1,6 +1,8 @@
-'use client'
+'use client';
+
 import React, { useState } from 'react';
 import { supabase } from '@/services/supabase';
+import { Loader } from '@/components/Loader';
 
 interface VaccinationsProps {
   pet_id: string;
@@ -8,6 +10,7 @@ interface VaccinationsProps {
 
 export const Vaccinations: React.FC<VaccinationsProps> = ({ pet_id }) => {
   const [vaccinations, setVaccinations] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   React.useEffect(() => {
     const fetchVaccinations = async () => {
@@ -21,10 +24,15 @@ export const Vaccinations: React.FC<VaccinationsProps> = ({ pet_id }) => {
       } else {
         setVaccinations(data);
       }
+      setIsLoading(false);
     };
 
     fetchVaccinations();
   }, [pet_id]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="flex gap-4">

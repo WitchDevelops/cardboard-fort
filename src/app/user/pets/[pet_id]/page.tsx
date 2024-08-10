@@ -1,6 +1,8 @@
 import { getPetData } from '@/data/pets/getPetData';
 import { supabase } from '@/services/supabase';
 import { PetPage } from '@/components/PetPage';
+import { Loader } from '@/components/Loader';
+import { Suspense } from 'react';
 
 export async function generateStaticParams() {
   try {
@@ -23,5 +25,9 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: { params: { pet_id: string } }) {
   const initialPetData = await getPetData(params.pet_id);
-  return <PetPage initialPetData={initialPetData} />;
+  return (
+    <Suspense fallback={<Loader />}>
+      <PetPage initialPetData={initialPetData} />
+    </Suspense>
+  );
 }

@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Tag } from '@/components/Tag';
 import { TextTile } from '@/components/layout/TextTile';
 import Image, { ImageProps } from 'next/image';
 import { UnavailableImage } from '@/components/img/UnavailableImage';
 import { formatDate } from '@/utils/date/formatDate';
-import { PetData } from '@/utils/types/petData';
 
 export const BasicInfo: React.FC<PetData> = ({ ...pet }) => {
   const { microchip_nr, pet_bio } = pet.pets_more_info || {};

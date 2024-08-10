@@ -1,6 +1,8 @@
 'use client';
+
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/services/supabase';
+import { Loader } from '@/components/Loader';
 
 interface MedicationsProps {
   pet_id: string;
@@ -8,6 +10,8 @@ interface MedicationsProps {
 
 export const Medications: React.FC<MedicationsProps> = ({ pet_id }) => {
   const [medications, setMedications] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   const fetchMedications = async () => {
     const { data, error } = await supabase
       .from('pet_medications')
@@ -19,6 +23,7 @@ export const Medications: React.FC<MedicationsProps> = ({ pet_id }) => {
     } else {
       setMedications(data);
     }
+    setIsLoading(false);
   };
   useEffect(() => {
     if (medications.length === 0) {
@@ -26,6 +31,10 @@ export const Medications: React.FC<MedicationsProps> = ({ pet_id }) => {
       fetchMedications();
     }
   }, [medications]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="flex gap-4">
