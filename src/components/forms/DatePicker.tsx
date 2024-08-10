@@ -6,7 +6,6 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import {
-  Form,
   FormControl,
   FormField,
   FormItem,
@@ -17,23 +16,23 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
+} from '@/components/ui/popover-dialog';
 
-export const DatePicker = (props) => {
+export const DatePicker = ({...props}) => {
   return (
     <FormField
       control={props.control}
-      name="dateOfBirth"
+      name={props.name}
       render={({ field }) => (
-        <FormItem className="flex flex-col" onClick={(e) => e.stopPropagation()}>
-          <FormLabel>Date of birth</FormLabel>
+        <FormItem className="">
+          <FormLabel>{props.label}</FormLabel>
           <Popover>
             <PopoverTrigger asChild>
-              <FormControl onClick={(e) => e.stopPropagation()}>
+              <FormControl>
                 <Button
                   variant={'calendar'}
                   className={cn(
-                    'w-[240px] pl-3 text-left font-normal',
+                    'w-full pl-3 text-left font-normal focus-visible:outline focus-visible:outline-2 focus-visible:outline-secondary-600',
                     !field.value && 'text-muted-foreground'
                   )}
                 >
@@ -46,7 +45,7 @@ export const DatePicker = (props) => {
                 </Button>
               </FormControl>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="start">
+            <PopoverContent className="w-auto p-0" align="end">
               <Calendar
                 mode="single"
                 selected={field.value}
@@ -59,7 +58,7 @@ export const DatePicker = (props) => {
             </PopoverContent>
           </Popover>
 
-          <FormMessage />
+          <FormMessage className="text-danger" />
         </FormItem>
       )}
     />

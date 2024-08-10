@@ -14,9 +14,7 @@ import { DatePickerForm } from '@/components/forms/DatePickerForm';
 export const ChoseDateModal = () => {
   const [open, setOpen] = useState(false);
   return (
-    <Dialog 
-    // open={open} onOpenChange={setOpen}
-    >
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <LaunchModalBtn title="Launch modal" onClick={() => setOpen(true)} />
       </DialogTrigger>

@@ -6,23 +6,11 @@ import { useForm } from 'react-hook-form';
 
 import { addPet } from '@/data/pets/addPet';
 import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import { Form } from '@/components/ui/form';
 import { useToast } from '@/components/ui/use-toast';
 import { TextInput } from '@/components/forms/TextInput';
 import { SelectInput } from '@/components/forms/SelectInput';
 import { DatePicker } from '@/components/forms/DatePicker';
-
-//date has to be in the YYYY-MM-DD format so that it's compatible with the format in the database
-const dateRegex =
-  /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/;
 
 const FormSchema = z.object({
   petName: z
@@ -30,9 +18,7 @@ const FormSchema = z.object({
     .min(2, { message: 'Pet name must be at least 2 characters long.' })
     .max(50, { message: 'Pet name cannot be longer than 50 characters.' }),
   species: z.string(),
-  dateOfBirth: z
-    .string()
-    .regex(dateRegex, { message: 'Please use the format YYYY-MM-DD.' }),
+  dateOfBirth: z.date({ message: 'Please provide a date of birth.' }),
   breed: z.string(),
   picture: z.string(),
   sex: z.enum(['male', 'female']),
@@ -75,7 +61,7 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="w-full space-y-6 "
       >
-        <div className="lg:grid lg:grid-cols-2 gap-4">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-4">
           <TextInput
             label="Pet Name*"
             name="petName"
@@ -101,7 +87,7 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
           />
 
           <SelectInput
-            label="Sex"
+            label="Sex*"
             name="sex"
             options={[
               { value: 'male', label: 'Male' },
@@ -112,7 +98,7 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
           />
 
           <SelectInput
-            label="Neutered"
+            label="Neutered*"
             name="neutered"
             options={[
               { value: 'no', label: 'No' },
@@ -122,16 +108,12 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
             error={form.formState.errors.neutered?.message}
           />
 
-          {/* TODO: change it from string to type Date with a datepicker */}
-          <TextInput
-            label="Date of Birth"
+          <DatePicker
+            label="Date of Birth*"
             name="dateOfBirth"
-            placeholder="YYYY-MM-DD"
             register={form.register}
             error={form.formState.errors.dateOfBirth?.message}
           />
-
-          <DatePicker  />
 
           <TextInput
             label="Breed"
