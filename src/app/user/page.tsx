@@ -1,10 +1,9 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { PetGrid } from '@/components/PetGrid';
 import { AddPetModal } from '@/components/modals/AddPetModal';
 import { PetData } from '@/utils/types/petData';
 import { Loader } from '@/components/Loader';
-import { Suspense } from 'react';
 
 const page = () => {
   const [pets, setPets] = useState<PetData[]>([]);
@@ -30,8 +29,6 @@ const page = () => {
       <Suspense fallback={<Loader />}>
         <PetGrid refetch={petAdded} />
       </Suspense>
-
-      {/* <PetGrid refetch={petAdded} /> */}
     </div>
   );
 };

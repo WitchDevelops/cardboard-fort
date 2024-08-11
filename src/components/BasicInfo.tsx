@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Tag } from '@/components/Tag';
 import { TextTile } from '@/components/layout/TextTile';
-import Image, { ImageProps } from 'next/image';
+import Image from 'next/image';
 import { UnavailableImage } from '@/components/img/UnavailableImage';
 import { formatDate } from '@/utils/date/formatDate';
 
