@@ -16,7 +16,6 @@ import {
 import { font_accent } from '@/components/ui/fonts';
 import { PetCardImage } from '@/components/img/PetCardImage';
 import { calculateAge } from '@/utils/date/calculateAge';
-import { Button } from '@/components/ui/button';
 import { TbDotsVertical } from 'react-icons/tb';
 import {
   DropdownMenu,
@@ -34,6 +33,7 @@ interface PetCardProps {
   img?: string;
   date_of_birth: Date;
   pet_id: string;
+  onDelete: (pet_id: string) => void;
 }
 
 export const PetCard = ({
@@ -43,6 +43,7 @@ export const PetCard = ({
   img,
   date_of_birth,
   pet_id,
+  onDelete
 }: PetCardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isMale = sex === 'male';
@@ -51,7 +52,7 @@ export const PetCard = ({
   const age = calculateAge(date_of_birth, currentDate);
 
   const handleDeletePet = () => {
-    console.log(`Pet deleted: ${pet_id}`);
+    onDelete(pet_id);
     setIsModalOpen(false);
   };
 

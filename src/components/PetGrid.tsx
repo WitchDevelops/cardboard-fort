@@ -4,9 +4,10 @@ import { getPets } from '@/data/pets/getPets';
 
 type PetGridProps = {
   refetch: boolean;
+  onDelete: (pet_id: string) => void;
 };
 
-export const PetGrid: React.FC<PetGridProps> = ({ refetch }) => {
+export const PetGrid: React.FC<PetGridProps> = ({ refetch, onDelete }) => {
   const [pets, setPets] = useState<PetData[]>([]);
 
   useEffect(() => {
@@ -24,7 +25,7 @@ export const PetGrid: React.FC<PetGridProps> = ({ refetch }) => {
   return (
     <div className="flex flex-col sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xxl:grid-cols-5 gap-4 py-4">
       {pets.map((pet) => (
-        <PetCard key={pet.pet_id} {...pet} />
+        <PetCard key={pet.pet_id} {...pet} onDelete={onDelete} />
       ))}
     </div>
   );

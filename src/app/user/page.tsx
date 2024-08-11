@@ -3,14 +3,21 @@ import React, { useState, useEffect } from 'react';
 import { PetGrid } from '@/components/PetGrid';
 import { AddPetModal } from '@/components/modals/AddPetModal';
 import { PetData } from '@/utils/types/petData';
+import { removePet } from '@/data/pets/removePet';
 
 const page = () => {
   const [pets, setPets] = useState<PetData[]>([]);
-  const [petAdded, setPetAdded] = useState(false);
+  const [petAddedOrRemoved, setPetAddedOrRemoved] = useState(false);
 
   useEffect(() => {
-    setPetAdded(false);
-  }, [petAdded]);
+    setPetAddedOrRemoved(false);
+  }, [petAddedOrRemoved]);
+
+  const handleRemovePet = async (petId: string) => {
+    await removePet(petId);
+    setPets((prevPets) => prevPets.filter((pet) => pet.pet_id !== petId));
+    setPetAddedOrRemoved(true);
+  };
 
   return (
     <div>
@@ -21,11 +28,11 @@ const page = () => {
         <AddPetModal
           onPetAdded={(newPet) => {
             setPets((prevPets) => [...prevPets, newPet]);
-            setPetAdded(true);
+            setPetAddedOrRemoved(true);
           }}
         />
       </div>
-      <PetGrid refetch={petAdded}  />
+      <PetGrid refetch={petAddedOrRemoved} onDelete={handleRemovePet} />
     </div>
   );
 };
