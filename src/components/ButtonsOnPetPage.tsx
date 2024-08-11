@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Modal } from './modals/Modal';
+import { DeletePetModal } from '@/components/modals/DeletePetModal';
 
 export const ButtonsOnPetPage: React.FC<PetData> = ({ pet_id, pet_name }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,7 +37,7 @@ export const ButtonsOnPetPage: React.FC<PetData> = ({ pet_id, pet_name }) => {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <Modal
+      <DeletePetModal
         isOpen={isModalOpen}
         petName={pet_name}
         onClose={() => setIsModalOpen(false)}
