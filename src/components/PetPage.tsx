@@ -18,4 +18,4 @@ export const PetPage = ({ initialPetData }: PageProps) => {
       {pet && <PetTabs {...pet} />}
     </div>
   );
-}
+};
