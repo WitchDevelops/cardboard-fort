@@ -62,7 +62,7 @@ const AlertDialogFooter = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      'flex flex-col gap-2 sm:flex-row sm:justify-end sm:space-x-2 p-6 pt-3',
+      'flex flex-col gap-2 sm:flex-row sm:justify-between sm:space-x-2 p-6 pt-3',
       className
     )}
     {...props}
@@ -77,7 +77,7 @@ const AlertDialogTitle = React.forwardRef<
   <AlertDialogPrimitive.Title
     ref={ref}
     className={cn(
-      'text-lg font-semibold bg-danger text-white p-6 rounded-t-md',
+      'text-lg font-semibold bg-alert-gradient text-white py-4 px-6 rounded-t-md',
       className
     )}
     {...props}
@@ -92,7 +92,7 @@ const AlertDialogDescription = React.forwardRef<
   <AlertDialogPrimitive.Description
     ref={ref}
     className={cn(
-      'text-sm text-muted-foreground px-6 py-3 mt-0 mb-0',
+      'text-sm text-muted-foreground text-left px-6 py-3 mt-0 mb-0',
       className
     )}
     {...props}

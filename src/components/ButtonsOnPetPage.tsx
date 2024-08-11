@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { TbEdit } from 'react-icons/tb';
+import { TbEdit, TbTrashFilled } from 'react-icons/tb';
 import { TbDotsVertical } from 'react-icons/tb';
 import {
   DropdownMenu,
@@ -51,13 +51,16 @@ export const ButtonsOnPetPage = () => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel
+              className="min-w-[100px]"
               onClick={() => console.log('cancel btn clicked')}
             >
               Cancel
             </AlertDialogCancel>
             <AlertDialogAction
+              className="min-w-[100px] flex items-center gap-2"
               onClick={() => console.log('delete btn clicked')}
-            >
+            > 
+              <TbTrashFilled />
               Delete
             </AlertDialogAction>
           </AlertDialogFooter>
