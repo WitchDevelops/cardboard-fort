@@ -14,7 +14,7 @@ export const PetPage = ({ initialPetData }: PageProps) => {
 
   return (
     <div className="mt-[20px]">
-      <ButtonsOnPetPage />
+      {pet && <ButtonsOnPetPage {...pet} />}
       {pet && <PetTabs {...pet} />}
     </div>
   );

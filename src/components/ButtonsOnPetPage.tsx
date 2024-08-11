@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { TbEdit, TbTrashFilled } from 'react-icons/tb';
+import { TbEdit } from 'react-icons/tb';
 import { TbDotsVertical } from 'react-icons/tb';
 import {
   DropdownMenu,
@@ -7,65 +8,41 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
+import { Modal } from './modals/Modal';
 
-export const ButtonsOnPetPage = () => {
+export const ButtonsOnPetPage: React.FC<PetData> = ({ pet_id, pet_name }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleDeletePet = () => {
+    console.log(`Pet deleted: ${pet_id}`);
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="flex justify-end gap-2 py-2">
       <Button className="flex items-center gap-2">
         <TbEdit /> Edit
       </Button>
 
-      <AlertDialog>
-        <DropdownMenu>
-          <DropdownMenuTrigger className="bg-primary hover:bg-primary-hover text-white rounded-md text-sm px-4 py-2">
-            <TbDotsVertical />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem>
-              <AlertDialogTrigger className="text-danger hover:text-danger-hover w-full">
-                Delete pet
-              </AlertDialogTrigger>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>
-              Are you sure you want to delete this pet?
-            </AlertDialogTitle>
-            <AlertDialogDescription>
-              This is destructive and final operation. It will permanently
-              delete the pet and all its data. This cannot be undone.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel
-              className="min-w-[100px]"
-              onClick={() => console.log('cancel btn clicked')}
-            >
-              Cancel
-            </AlertDialogCancel>
-            <AlertDialogAction
-              className="min-w-[100px] flex items-center gap-2"
-              onClick={() => console.log('delete btn clicked')}
-            > 
-              <TbTrashFilled />
-              Delete
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <DropdownMenu>
+        <DropdownMenuTrigger className="bg-primary hover:bg-primary-hover text-white rounded-md text-sm px-4 py-2">
+          <TbDotsVertical />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem
+            className="text-danger hover:text-danger-hover w-full"
+            onClick={() => setIsModalOpen(true)}
+          >
+            Delete pet
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <Modal
+        isOpen={isModalOpen}
+        petName={pet_name}
+        onClose={() => setIsModalOpen(false)}
+        onDelete={handleDeletePet}
+      />
     </div>
   );
 };
