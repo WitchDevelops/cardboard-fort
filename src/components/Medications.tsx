@@ -12,25 +12,23 @@ export const Medications: React.FC<MedicationsProps> = ({ pet_id }) => {
   const [medications, setMedications] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchMedications = async () => {
-    const { data, error } = await supabase
-      .from('pet_medications')
-      .select('*')
-      .eq('pet_id', pet_id);
-
-    if (error) {
-      console.error(error);
-    } else {
-      setMedications(data);
-    }
-    setIsLoading(false);
-  };
   useEffect(() => {
-    if (medications.length === 0) {
-      console.log(medications.length);
-      fetchMedications();
-    }
-  }, [medications]);
+    const fetchMedications = async () => {
+      const { data, error } = await supabase
+        .from('pet_medications')
+        .select('*')
+        .eq('pet_id', pet_id);
+      if (error) {
+        alert('Error fetching medications');
+        setIsLoading(false);
+        throw error;
+      } else {
+        setMedications(data);
+      }
+      setIsLoading(false);
+    };
+    fetchMedications();
+  }, [pet_id]);
 
   if (isLoading) {
     return <Loader />;
@@ -40,7 +38,10 @@ export const Medications: React.FC<MedicationsProps> = ({ pet_id }) => {
     <div className="flex gap-4">
       {medications.length > 0 ? (
         medications.map((medication) => (
-          <div key={medication.med_id} className="bg-slate-50 rounded-lg px-4 py-2">
+          <div
+            key={medication.med_id}
+            className="bg-slate-50 rounded-lg px-4 py-2"
+          >
             <h3 className="font-bold text-md">{medication.med_name}</h3>
             <p>Dose: {medication.med_dose}</p>
             <p>Frequency: {medication.med_frequency}</p>

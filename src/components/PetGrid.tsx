@@ -10,6 +10,7 @@ type PetGridProps = {
 export const PetGrid: React.FC<PetGridProps> = ({ refetch }) => {
   const [pets, setPets] = useState<PetData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchPets = async () => {
@@ -18,7 +19,8 @@ export const PetGrid: React.FC<PetGridProps> = ({ refetch }) => {
         const petsData = await getPets();
         setPets(petsData);
       } catch (error) {
-        console.error(error);
+        setErrorMessage('Failed to load pets. Please try again.');
+        throw error;
       } finally {
         setIsLoading(false);
       }
@@ -26,9 +28,14 @@ export const PetGrid: React.FC<PetGridProps> = ({ refetch }) => {
     fetchPets();
   }, [refetch]);
 
+
   return isLoading ? (
     <Loader />
-  ) : (
+  ) 
+  : errorMessage ? (
+    <div className="text-red-500">{errorMessage}</div>
+  ) 
+  : (
     <div className="flex flex-col sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xxl:grid-cols-5 gap-4 py-4">
       {pets.map((pet) => (
         <PetCard key={pet.pet_id} {...pet} />

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { supabase } from '@/services/supabase';
 import { Loader } from '@/components/Loader';
 
@@ -12,7 +12,7 @@ export const Vaccinations: React.FC<VaccinationsProps> = ({ pet_id }) => {
   const [vaccinations, setVaccinations] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchVaccinations = async () => {
       const { data, error } = await supabase
         .from('pet_vaccinations')
@@ -20,7 +20,9 @@ export const Vaccinations: React.FC<VaccinationsProps> = ({ pet_id }) => {
         .eq('pet_id', pet_id);
 
       if (error) {
-        console.error(error);
+        alert('Error fetching vaccinations');
+        setIsLoading(false);
+        throw error;
       } else {
         setVaccinations(data);
       }
