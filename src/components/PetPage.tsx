@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { PetTabs } from '@/components/PetTabs';
 import { ButtonsOnPetPage } from '@/components/ButtonsOnPetPage';
-import { PetData } from '@/utils/types/petData';
 
 type PageProps = {
   initialPetData: PetData | null;

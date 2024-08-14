@@ -1,7 +1,6 @@
 import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { BasicInfo } from '@/components/BasicInfo';
-import { PetData } from '@/utils/types/petData';
 import { Vaccinations } from '@/components/Vaccinations';
 import { Medications } from '@/components/Medications';
 
