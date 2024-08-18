@@ -20,3 +20,19 @@ declare interface AddPetFormData {
   sex?: 'male' | 'female';
   neutered?: 'yes' | 'no';
 }
+
+declare interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+declare type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'danger'
+  | 'warning'
+  | 'outline'
+  | 'white'
+  | 'ghost'
+  | 'link'
+  | 'cancel';

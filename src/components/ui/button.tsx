@@ -9,13 +9,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default:
+        primary:
           'bg-primary text-white shadow hover:bg-primary-hover focus-visible:outline-primary-hover',
-        destructive: 'bg-danger text-white shadow-sm hover:bg-danger-hover',
-        outline:
-          'border border-input bg-background text-white shadow-sm hover:bg-accent hover:text-accent-foreground hover:scale-105 transition-transform',
         secondary:
           'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
+        danger: 'bg-danger text-white shadow-sm hover:bg-danger-hover',
+        warning: 'bg-warning text-white shadow-sm hover:bg-warning-hover',
+        outline:
+          'border border-input bg-background text-white shadow-sm hover:bg-accent hover:text-accent-foreground hover:scale-105 transition-transform',
         white:
           'bg-white text-primary focus-visible:outline-white-hover hover:scale-105 transition-transform',
 
@@ -32,7 +33,7 @@ const buttonVariants = cva(
       },
     },
     defaultVariants: {
-      variant: 'default',
+      variant: 'primary',
       size: 'default',
     },
   }

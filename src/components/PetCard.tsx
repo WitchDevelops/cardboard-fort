@@ -25,14 +25,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { DeletePetModal } from '@/components/modals/DeletePetModal';
 
-interface PetCardProps {
-  pet_name: string;
-  breed?: string;
-  species: string;
-  sex?: 'female' | 'male';
-  img?: string;
-  date_of_birth: Date;
-  pet_id: string;
+interface PetCardProps extends PetData {
   onDelete: (pet_id: string) => void;
 }
 
@@ -43,7 +36,7 @@ export const PetCard = ({
   img,
   date_of_birth,
   pet_id,
-  onDelete
+  onDelete,
 }: PetCardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isMale = sex === 'male';
