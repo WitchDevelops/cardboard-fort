@@ -22,6 +22,8 @@ const buttonVariants = cva(
 
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
+        calendar:
+          'border border-input bg-background shadow-sm transition-transform',
         cancel:
           'text-gray-500 hover:text-gray-700 hover:bg-gray-100 outline outline-1 outline-gray-500',
       },

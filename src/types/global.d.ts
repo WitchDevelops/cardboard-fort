@@ -6,7 +6,7 @@ declare interface PetData {
   date_of_birth: Date;
   species: string;
   neutered: boolean;
-  sex?: 'female' | 'male';
+  sex: 'female' | 'male';
   img?: string;
   pets_more_info?: { pet_bio?: string; microchip_nr?: string };
 }
@@ -14,11 +14,11 @@ declare interface PetData {
 declare interface AddPetFormData {
   petName: string;
   species: string;
-  dateOfBirth: string;
-  breed: string;
+  dateOfBirth: date;
+  breed?: string;
   picture?: string;
-  sex?: 'male' | 'female';
-  neutered?: 'yes' | 'no';
+  sex: 'male' | 'female';
+  neutered: 'yes' | 'no';
 }
 
 declare interface ModalProps {
