@@ -35,4 +35,5 @@ declare type ButtonVariant =
   | 'white'
   | 'ghost'
   | 'link'
-  | 'cancel';
+  | 'cancel'
+  | 'calendar';
