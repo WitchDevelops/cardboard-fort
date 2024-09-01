@@ -12,14 +12,14 @@ import { DeletePetModal } from '@/components/modals/DeletePetModal';
 import { useRouter } from 'next/navigation';
 import { removePet } from '@/data/pets/removePet';
 
-export const ButtonsOnPetPage: React.FC<PetData> = ({ pet_id, pet_name }) => {
+export const PetActionButtons: React.FC<PetData> = ({ pet_id, pet_name }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
 
   const handleDeletePet = () => {
     removePet(pet_id);
     setIsModalOpen(false);
-    router.push('/user');
+    router.replace('/user');
   };
 
   return (
