@@ -29,6 +29,7 @@ const config = {
         'secondary-200': '#BDE1DD',
         'secondary-600': '#65C5BA',
         'secondary-800': '#3f9286',
+        'danger-hover': '#A40023',
         'white-100': '#f8f9fd',
         'white-400': '#d8d8d8',
         black: '#0f0f0f',

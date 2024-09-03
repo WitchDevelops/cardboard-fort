@@ -5,9 +5,10 @@ import { Loader } from '@/components/Loader';
 
 type PetGridProps = {
   refetch: boolean;
+  onDelete: (pet_id: string) => void;
 };
 
-export const PetGrid: React.FC<PetGridProps> = ({ refetch }) => {
+export const PetGrid: React.FC<PetGridProps> = ({ refetch, onDelete }) => {
   const [pets, setPets] = useState<PetData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -38,7 +39,7 @@ export const PetGrid: React.FC<PetGridProps> = ({ refetch }) => {
   : (
     <div className="flex flex-col sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xxl:grid-cols-5 gap-4 py-4">
       {pets.map((pet) => (
-        <PetCard key={pet.pet_id} {...pet} />
+        <PetCard key={pet.pet_id} {...pet} onDelete={onDelete} />
       ))}
     </div>
   );

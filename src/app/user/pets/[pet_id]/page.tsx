@@ -25,6 +25,7 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: { params: { pet_id: string } }) {
   const initialPetData = await getPetData(params.pet_id);
+
   return (
     <Suspense fallback={<Loader />}>
       <PetPage initialPetData={initialPetData} />

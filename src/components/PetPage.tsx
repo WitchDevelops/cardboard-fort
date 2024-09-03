@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { PetTabs } from '@/components/PetTabs';
-import { ButtonsOnPetPage } from '@/components/ButtonsOnPetPage';
+import { PetActionButtons } from '@/components/PetActionButtons';
 
 type PageProps = {
   initialPetData: PetData | null;
@@ -13,8 +13,8 @@ export const PetPage = ({ initialPetData }: PageProps) => {
 
   return (
     <div className="mt-[20px]">
-      <ButtonsOnPetPage />
+      {pet && <PetActionButtons {...pet} />}
       {pet && <PetTabs {...pet} />}
     </div>
   );
-}
+};
