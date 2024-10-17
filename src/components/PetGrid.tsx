@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
 import { PetCard } from '@/components/PetCard';
-import { getPets } from '@/data/pets/getPets';
+import { usePets } from '@/hooks/usePets';
 import { Loader } from '@/components/Loader';
 
 type PetGridProps = {
@@ -8,39 +7,37 @@ type PetGridProps = {
   onDelete: (pet_id: string) => void;
 };
 
-export const PetGrid: React.FC<PetGridProps> = ({ refetch, onDelete }) => {
-  const [pets, setPets] = useState<PetData[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+export const PetGrid: React.FC<PetGridProps> = ({ onDelete }) => {
+  const { pets, isLoading, error } = usePets();
+  //   const fetchPets = async () => {
+  //     setIsLoading(true);
+  //     try {
+  //       const petsData = await getPets();
+  //       setPets(petsData);
+  //     } catch (error) {
+  //       setErrorMessage('Failed to load pets. Please try again.');
+  //       throw error;
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+  //   fetchPets();
+  // }, [refetch]);
 
-  useEffect(() => {
-    const fetchPets = async () => {
-      setIsLoading(true);
-      try {
-        const petsData = await getPets();
-        setPets(petsData);
-      } catch (error) {
-        setErrorMessage('Failed to load pets. Please try again.');
-        throw error;
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchPets();
-  }, [refetch]);
+  if (isLoading) {
+    return <Loader />;
+  }
 
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
-  return isLoading ? (
-    <Loader />
-  ) 
-  : errorMessage ? (
-    <div className="text-red-500">{errorMessage}</div>
-  ) 
-  : (
+  return (
     <div className="flex flex-col sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xxl:grid-cols-5 gap-4 py-4">
-      {pets.map((pet) => (
-        <PetCard key={pet.pet_id} {...pet} onDelete={onDelete} />
-      ))}
+      {pets &&
+        pets.map((pet) => (
+          <PetCard key={pet.pet_id} {...pet} onDelete={onDelete} />
+        ))}
     </div>
   );
 };
