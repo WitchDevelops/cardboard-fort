@@ -10,14 +10,14 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { DeletePetModal } from '@/components/modals/DeletePetModal';
 import { useRouter } from 'next/navigation';
-import { removePet } from '@/data/pets/removePet';
+import { petService } from '@/services/allPetsService';
 
 export const PetActionButtons: React.FC<PetData> = ({ pet_id, pet_name }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
 
-  const handleDeletePet = () => {
-    removePet(pet_id);
+  const handleDeletePet = async () => {
+    await petService.deletePet(pet_id);
     setIsModalOpen(false);
     router.replace('/user');
   };
