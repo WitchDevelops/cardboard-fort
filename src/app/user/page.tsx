@@ -4,7 +4,7 @@ import { PetGrid } from '@/components/PetGrid';
 import { AddPetModal } from '@/components/modals/AddPetModal';
 import { PetData } from '@/utils/types/petData';
 import { Loader } from '@/components/Loader';
-import { removePet } from '@/data/pets/removePet';
+import { petService } from '@/services/allPetsService';
 
 const page = () => {
   const [pets, setPets] = useState<PetData[]>([]);
@@ -14,9 +14,9 @@ const page = () => {
     setPetListChanged(false);
   }, [petListChanged]);
 
-  const handleRemovePet = async (petId: string) => {
-    await removePet(petId);
-    setPets((prevPets) => prevPets.filter((pet) => pet.pet_id !== petId));
+  const handleRemovePet = async (pet_id: string) => {
+    await petService.deletePet(pet_id);
+    setPets((prevPets) => prevPets.filter((pet) => pet.pet_id !== pet_id));
     setPetListChanged(true);
   };
 

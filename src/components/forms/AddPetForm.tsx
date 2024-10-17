@@ -4,13 +4,14 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
-import { addPet } from '@/data/pets/addPet';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { useToast } from '@/components/ui/use-toast';
 import { TextInput } from '@/components/forms/TextInput';
 import { SelectInput } from '@/components/forms/SelectInput';
 import { DatePicker } from '@/components/forms/DatePicker';
+import { petService } from '@/services/allPetsService';
+import { mapFormDataToDatabaseSchema } from '@/data/pets/mapPetData';
 
 const FormSchema = z.object({
   petName: z
@@ -38,7 +39,8 @@ export const AddPetForm: React.FC<AddPetFormProps> = ({ onSuccess }) => {
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     try {
-      const newPet = await addPet(data);
+      const transformedData = mapFormDataToDatabaseSchema(data);
+      const newPet = await petService.createPet(transformedData);
       if (newPet) {
         toast({
           title: 'Pet added successfully!',

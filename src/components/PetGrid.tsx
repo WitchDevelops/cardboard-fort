@@ -1,6 +1,7 @@
 import { PetCard } from '@/components/PetCard';
 import { usePets } from '@/hooks/usePets';
 import { Loader } from '@/components/Loader';
+import { petService } from '@/services/allPetsService';
 
 type PetGridProps = {
   refetch: boolean;
@@ -9,20 +10,6 @@ type PetGridProps = {
 
 export const PetGrid: React.FC<PetGridProps> = ({ onDelete }) => {
   const { pets, isLoading, error } = usePets();
-  //   const fetchPets = async () => {
-  //     setIsLoading(true);
-  //     try {
-  //       const petsData = await getPets();
-  //       setPets(petsData);
-  //     } catch (error) {
-  //       setErrorMessage('Failed to load pets. Please try again.');
-  //       throw error;
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   };
-  //   fetchPets();
-  // }, [refetch]);
 
   if (isLoading) {
     return <Loader />;

@@ -7,10 +7,10 @@ export const petService = {
   createPet: async (pet: PetData): Promise<PetData> => {
     return supabaseService.post<PetData>('pets_data', pet);
   },
-  updatePet: async (id: string, pet: PetData): Promise<PetData> => {
-    return supabaseService.put<PetData>('pets_data', id, pet);
+  updatePet: async (pet_id: string, pet: PetData): Promise<PetData> => {
+    return supabaseService.put<PetData>('pets_data', pet_id, pet);
   },
-  deletePet: async (id: string): Promise<void> => {
-    return supabaseService.delete('pets_data', id);
+  deletePet: async (pet_id: string): Promise<void> => {
+    return supabaseService.delete('pets_data', pet_id, 'pet_id');
   },
 };

@@ -24,6 +24,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { DeletePetModal } from '@/components/modals/DeletePetModal';
+import { petService } from '@/services/allPetsService';
 
 interface PetCardProps extends PetData {
   onDelete: (pet_id: string) => void;
@@ -44,9 +45,14 @@ export const PetCard = ({
   const currentDate = new Date();
   const age = calculateAge(date_of_birth, currentDate);
 
-  const handleDeletePet = () => {
-    onDelete(pet_id);
-    setIsModalOpen(false);
+  const handleDeletePet = async () => {
+    try {
+      await petService.deletePet(pet_id);
+      onDelete(pet_id);
+      setIsModalOpen(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

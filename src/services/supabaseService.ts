@@ -40,8 +40,12 @@ export const supabaseService = {
     );
     return response.data[0];
   },
-  delete: async (table: string, id: string): Promise<void> => {
-    await axios.delete(`${BASE_URL}/rest/v1/${table}?id=eq.${id}`, {
+  delete: async (
+    table: string,
+    id: string,
+    column: string = 'id'
+  ): Promise<void> => {
+    await axios.delete(`${BASE_URL}/rest/v1/${table}?${column}=eq.${id}`, {
       headers: {
         apikey: API_KEY,
       },
