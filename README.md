@@ -21,15 +21,17 @@ Deployed with Vercel: https://cardboard-fort.vercel.app/
 - stores and displays vet appointments, vaccinations and medications info
 
 In progress:
+- finish CRUD
+- connect image storage
+
+TODO:
+- naming the app
+- connecting custom domain
 - authentication
 - sends reminders for an upcoming appointment
 - has a photo gallery (uploading images, deleting images)
 - tracks walks (for dogs)
 - displays daily pet's fun fact
-
-TODO:
-- naming the app
-- connecting custom domain
 
 <!-- # Functional requirements -->
 
